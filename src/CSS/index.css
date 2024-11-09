@@ -3,6 +3,7 @@
   --secondary-color: #2c3e50;
   --text-color: #333;
   --light-bg: #f8f9fa;
+  --nav-color: #706e6e;
 }
 
 body {
@@ -26,7 +27,7 @@ body {
 }
 
 .nav-link {
-  color: var(--secondary-color) !important;
+  color: var(--nav-color) !important;
   font-weight: 500;
   padding: 0.5rem 1rem !important;
   transition: color 0.3s ease;
