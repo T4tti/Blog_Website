@@ -18,13 +18,39 @@
         <img src="../Assets/ms-icon-70x70.png" alt="VietTechBlog" />
       </div>
       <h1>Đăng nhập vào VietTechBlog</h1>
-      <form>
-        <div class="input-group">
-          <input type="text" placeholder="Tên người dùng hoặc email" />
+      <form id="frmLogin">
+        <div class="Error" id="error-login">
+          Tên người dùng hoặc mật khẩu không chính xác
         </div>
         <div class="input-group">
-          <input type="password" placeholder="Mật khẩu" />
+          <div class="input-wrapper">
+            <img
+              src="../Assets/user-filled-svgrepo-com.svg"
+              class="img-icon"
+              alt="User Icon"
+            />
+            <input
+              id="username"
+              type="text"
+              placeholder="Tên người dùng hoặc email"
+            />
+          </div>
+          <div class="error" id="error-username">
+            Tên người dùng/email là bắt buộc
+          </div>
         </div>
+        <div class="input-group">
+          <div class="input-wrapper">
+            <img
+              src="../Assets/lock-svgrepo-com.svg"
+              class="img-icon"
+              alt="Lock Icon"
+            />
+            <input id="pwd" type="password" placeholder="Mật khẩu" />
+          </div>
+          <div class="error" id="error-pwd">Mật khẩu là bắt buộc</div>
+        </div>
+
         <button type="submit" class="login-button">Đăng nhập</button>
         <div class="footer-links">
           <a href="#">Quên mật khẩu?</a>
@@ -82,4 +108,6 @@
       </div>
     </div>
   </body>
+  <!-- script -->
+  <script src="../JS/login.js"></script>
 </html>
