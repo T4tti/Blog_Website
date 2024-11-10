@@ -1,64 +1,74 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../CSS/login.css" />
-    <title>VietTechBlog - Login</title>
-    <link
-      rel="icon"
-      type="img/png"
-      href="../Assets/favicon-32x32.png"
-      sizes="favicon-32x32"
-    />
+    <link rel="stylesheet" href="register.css" />
+    <title>Document</title>
   </head>
   <body>
-    <div class="login-container">
-      <div class="logo">
-        <img src="../Assets/ms-icon-70x70.png" alt="VietTechBlog" />
+    <div class="container">
+      <img src="ms-icon-70x70.png" alt="" />
+      <div class="logo">VietTechBlog</div>
+      <div class="title">Đăng ký tài khoản cho VietTechBlog</div>
+      <div class="description">
+        Chào mừng bạn đến <strong>Nền tảng VietTechBlog!</strong> Tham gia cùng
+        chúng tôi để tìm kiếm thông tin hữu ích cần thiết để cải thiện kỹ năng
+        IT của bạn. Vui lòng điền thông tin của bạn vào biểu mẫu bên dưới để
+        tiếp tục.
       </div>
-      <h1>Đăng nhập vào VietTechBlog</h1>
-      <form id="frmLogin">
-        <div class="Error" id="error-login">
-          Tên người dùng hoặc mật khẩu không chính xác
+      <form>
+        <div class="input-container">
+          <input type="text" placeholder="Tên của bạn" id="name" required />
+          <div class="warning">Tên là bắt buộc</div>
         </div>
-        <div class="input-group">
-          <div class="input-wrapper">
-            <img
-              src="../Assets/user-filled-svgrepo-com.svg"
-              class="img-icon"
-              alt="User Icon"
-            />
-            <input
-              id="username"
-              type="text"
-              placeholder="Tên người dùng hoặc email"
-            />
-          </div>
-          <div class="error" id="error-username">
-            Tên người dùng/email là bắt buộc
-          </div>
+        <div class="input-container">
+          <input
+            type="email"
+            placeholder="Địa chỉ email của bạn"
+            id="email"
+            required
+          />
+          <div class="warning">Email là bắt buộc</div>
         </div>
-        <div class="input-group">
-          <div class="input-wrapper">
-            <img
-              src="../Assets/lock-svgrepo-com.svg"
-              class="img-icon"
-              alt="Lock Icon"
-            />
-            <input id="pwd" type="password" placeholder="Mật khẩu" />
-          </div>
-          <div class="error" id="error-pwd">Mật khẩu là bắt buộc</div>
+        <div class="input-container">
+          <input
+            type="text"
+            placeholder="Tên tài khoản"
+            id="username"
+            required
+          />
+          <div class="warning">Tên tài khoản là bắt buộc</div>
         </div>
-
-        <button type="submit" class="login-button">Đăng nhập</button>
-        <div class="footer-links">
-          <a href="quenmk.html">Quên mật khẩu?</a>
-          <a href="register.html">Tạo tài khoản</a>
+        <div class="input-container">
+          <input
+            type="password"
+            placeholder="Mật khẩu"
+            id="password"
+            required
+          />
+          <div class="warning">Mật khẩu là bắt buộc</div>
         </div>
+        <div class="input-container">
+          <input
+            type="password"
+            placeholder="Xác nhận mật khẩu của bạn"
+            id="confirmPassword"
+            required
+          />
+          <div class="warning">Xác nhận mật khẩu là bắt buộc</div>
+        </div>
+        <div class="checkbox-container">
+          <input type="checkbox" id="terms" />
+          <label for="terms"
+            >Tôi đồng ý
+            <a href="#">Điều khoản dịch vụ của VietTechBlog</a></label
+          >
+        </div>
+        <button type="submit" id="registerBtn" disabled>Đăng ký</button>
       </form>
       <div class="social-login">
-        <div class="social-login-text"><span>Đăng nhập bằng</span></div>
+        <div class="social-login-text"><span>Đăng ký bằng</span></div>
         <div class="social-buttons">
           <button class="social-button">
             <svg width="20" height="20" viewBox="0 0 24 24">
@@ -107,7 +117,7 @@
         </div>
       </div>
     </div>
+
+    <script src="register.html"></script>
   </body>
-  <!-- script -->
-  <script src="../JS/login.js"></script>
 </html>
