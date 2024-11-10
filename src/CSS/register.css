@@ -72,12 +72,12 @@ button.enabled {
     opacity: 1;
     cursor: pointer;
 }
-.social-login {
+.social-register {
     text-align: center;
     margin-top: 20px;
   }
   
-  .social-login-text {
+  .social-register-text {
     color: #666;
     margin-bottom: 1rem;
     position: relative;
@@ -86,13 +86,13 @@ button.enabled {
     justify-content: center;
   }
   
-  .social-login-text span {
+  .social-register-text span {
     background: white;
     padding: 0 10px;
     z-index: 1;
   }
   
-  .social-login-text::before {
+  .social-register-text::before {
     content: "";
     position: absolute;
     top: 50%;
@@ -120,61 +120,7 @@ button.enabled {
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
-  }
-  
-  .social-button:hover {
-    background-color: #c2d9ef;
-    color: #5695e8;
-    border-color: #c2d9ef;
-  }
-  .social-login {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .social-login-text {
-    color: #666;
-    margin-bottom: 1rem;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .social-login-text span {
-    background: white;
-    padding: 0 10px;
-    z-index: 1;
-  }
-  
-  .social-login-text::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background-color: #ddd;
-    z-index: 0;
-  }
-  
-  .social-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-  }
-  
-  .social-button {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    background: white;
-    color: #666;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.9rem;
+    opacity: 1;
   }
   
   .social-button:hover {

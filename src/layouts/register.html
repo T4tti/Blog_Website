@@ -3,7 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="register.css" />
+    <link
+      rel="stylesheet"
+      href="../CSS/register.css
+    "
+    />
     <title>Document</title>
   </head>
   <body>
@@ -17,7 +21,7 @@
         IT của bạn. Vui lòng điền thông tin của bạn vào biểu mẫu bên dưới để
         tiếp tục.
       </div>
-      <form>
+      <form id="registerForm">
         <div class="input-container">
           <input type="text" placeholder="Tên của bạn" id="name" required />
           <div class="warning">Tên là bắt buộc</div>
@@ -48,6 +52,12 @@
             required
           />
           <div class="warning">Mật khẩu là bắt buộc</div>
+          <div class="warning" id="passwordLengthWarning">
+            Mật khẩu phải có ít nhất 8 ký tự
+          </div>
+          <div class="warning" id="passwordSpecialCharWarning">
+            Mật khẩu phải có ít nhất một ký tự đặc biệt
+          </div>
         </div>
         <div class="input-container">
           <input
@@ -57,18 +67,25 @@
             required
           />
           <div class="warning">Xác nhận mật khẩu là bắt buộc</div>
+          <div class="warning" id="passwordMatchWarning">
+            Mật khẩu không khớp
+          </div>
         </div>
         <div class="checkbox-container">
           <input type="checkbox" id="terms" />
           <label for="terms"
             >Tôi đồng ý
-            <a href="terms.html">Điều khoản dịch vụ của VietTechBlog</a></label
+            <a
+              href="terms.html
+            "
+              >Điều khoản dịch vụ của VietTechBlog</a
+            ></label
           >
         </div>
         <button type="submit" id="registerBtn" disabled>Đăng ký</button>
       </form>
-      <div class="social-login">
-        <div class="social-login-text"><span>Đăng ký bằng</span></div>
+      <div class="social-register">
+        <div class="social-register-text"><span>Đăng ký bằng</span></div>
         <div class="social-buttons">
           <button class="social-button">
             <svg width="20" height="20" viewBox="0 0 24 24">
@@ -118,6 +135,6 @@
       </div>
     </div>
 
-    <script src="register.html"></script>
+    <script src="../JS/register.js"></script>
   </body>
 </html>

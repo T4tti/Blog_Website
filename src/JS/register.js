@@ -26,6 +26,44 @@ fields.forEach((field) => {
   });
 });
 
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+const passwordLengthWarning = document.getElementById("passwordLengthWarning");
+const passwordSpecialCharWarning = document.getElementById(
+  "passwordSpecialCharWarning"
+);
+const passwordMatchWarning = document.getElementById("passwordMatchWarning");
+
+password.addEventListener("input", () => {
+  const specialCharRegex = /[!@#$%^&*(),.?":{}|<>]/;
+
+  if (password.value.length < 8) {
+    passwordLengthWarning.style.display = "block";
+    password.parentElement.classList.add("invalid");
+  } else {
+    passwordLengthWarning.style.display = "none";
+    password.parentElement.classList.remove("invalid");
+  }
+
+  if (!specialCharRegex.test(password.value)) {
+    passwordSpecialCharWarning.style.display = "block";
+    password.parentElement.classList.add("invalid");
+  } else {
+    passwordSpecialCharWarning.style.display = "none";
+    password.parentElement.classList.remove("invalid");
+  }
+});
+
+confirmPassword.addEventListener("input", () => {
+  if (confirmPassword.value !== password.value) {
+    passwordMatchWarning.style.display = "block";
+    confirmPassword.parentElement.classList.add("invalid");
+  } else {
+    passwordMatchWarning.style.display = "none";
+    confirmPassword.parentElement.classList.remove("invalid");
+  }
+});
+
 const termsCheckbox = document.getElementById("terms");
 const registerBtn = document.getElementById("registerBtn");
 
@@ -33,7 +71,10 @@ function validateForm() {
   let allFilled = fields.every(
     (field) => document.getElementById(field.id).value.trim() !== ""
   );
-  return allFilled && termsCheckbox.checked;
+  let passwordsMatch = password.value === confirmPassword.value;
+  let passwordValid =
+    password.value.length >= 8 && /[!@#$%^&*(),.?":{}|<>]/.test(password.value);
+  return allFilled && passwordsMatch && passwordValid && termsCheckbox.checked;
 }
 
 termsCheckbox.addEventListener("change", function () {
