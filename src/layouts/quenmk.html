@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="quenmk.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <img src="ms-icon-70x70.png" alt="VietTechBlog">
+        <div class="logo">VietTechBlog</div>
+        <div class="title">Quên mật khẩu!</div>
+        <div class="description">
+            Bạn quên mật khẩu của mình? Đừng lo lắng! Hãy cung cấp cho chúng tôi email bạn sử dụng để đăng ký tài khoản VietTechBlog. Chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu của bạn qua email đó.
+        </div>
+        <form>
+            <input type="email" id="email" placeholder="Địa chỉ email của bạn" required>
+            <button type="submit" id="submitBtn" disabled>Gửi email cho tôi</button>
+        </form>
+    </div>
+    <script>
+        const emailInput = document.getElementById('email');
+        const submitBtn = document.getElementById('submitBtn');
+    
+        emailInput.addEventListener('input', function() {
+            if (emailInput.value.trim() !== '') {
+                submitBtn.classList.add('enabled');
+                submitBtn.disabled = false;
+            } else {
+                submitBtn.classList.remove('enabled');
+                submitBtn.disabled = true;
+            }
+        });
+    </script>
+</body>
+</html>
