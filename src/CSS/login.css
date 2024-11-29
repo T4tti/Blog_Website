@@ -186,3 +186,35 @@ h1 {
   margin-bottom: 1rem;
   display: none;
 }
+/* Fullscreen dynamic background */
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Ensure it stays behind content */
+  background: linear-gradient(
+    45deg,
+    #6bb328,
+    #4d97ec,
+    #6e2399,
+    #e2748f,
+    #2e8ea7
+  ); /* Gradient colors */
+  background-size: 400% 400%; /* Larger background for smooth movement */
+  animation: gradientMove 10s ease infinite; /* Animation for movement */
+}
+
+/* Gradient animation */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
