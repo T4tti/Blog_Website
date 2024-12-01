@@ -12,4 +12,6 @@
     if ($conn->connect_error) {
         die("Kết nối cơ sở dữ liệu thất bại: " . $conn->connect_error);
     }
+    // Đặt charset để hỗ trợ tiếng Việt
+    $conn->set_charset("utf8mb4");
 ?>

@@ -35,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Kiểm tra xem email hoặc tên đăng nhập đã tồn tại chưa
-    $stmt = $conn->prepare("SELECT COUNT(*) FROM TAIKHOAN WHERE email = ? OR username = ?");
+    $stmt = $conn->prepare("SELECT COUNT(*) FROM taikhoan WHERE email = ? OR username = ?");
     $stmt->bind_param("ss", $email, $username);
     $stmt->execute();
     $stmt->bind_result($count);
@@ -43,12 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($count > 0) {
         die("Email hoặc tên tài khoản đã tồn tại!");
     }
+    $stmt->close();  // Giải phóng kết quả của truy vấn SELECT
 
     // Mã hóa mật khẩu
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Chuẩn bị câu lệnh SQL
-    $sql = "INSERT INTO TAIKHOAN (fullname, email, username, password, role) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO taikhoan (fullname, email, username, password, role) VALUES (?, ?, ?, ?, ?)";
     
     if ($stmt = $conn->prepare($sql)) {
         $role = 0; // Vai trò mặc định là người dùng
@@ -56,9 +57,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($stmt->execute()) {
             $_SESSION['message'] = 'Đăng ký thành công!';
+            $stmt->close();  // Giải phóng kết quả của truy vấn INSERT
             header("Location: ../layouts/login.html");
             exit();
         } else {
+            $stmt->close();  // Giải phóng kết quả của truy vấn INSERT
             die("Lỗi khi đăng ký: Vui lòng thử lại sau.");
         }
     } else {
