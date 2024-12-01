@@ -44,23 +44,85 @@ h1 {
 }
 
 .input-group {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-}
-
-/* Container for img and input */
-.input-group .input-wrapper {
-  display: flex;
-  flex-direction: row;
   width: 100%;
 }
 
-.input-group .error {
-  color: red;
-  font-size: 0.9rem;
+/* Container for img and input */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.5rem;
+}
+
+.input-wrapper:focus-within {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.img-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.input-wrapper input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0.5rem;
+  font-size: 1rem;
+  background-color: #fff;
+}
+
+input[type="password"] {
+  flex: 1;
+  padding-right: 40px; /* Để chừa không gian cho nút toggle */
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-password svg {
+  fill: #555; /* Màu biểu tượng */
+  transition: fill 0.3s ease;
+}
+
+.error {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
   display: none;
+}
+
+.error[aria-hidden="false"] {
+  display: block;
+}
+
+#error-login {
+  color: #dc3545;
   text-align: left;
+  margin-bottom: 1rem;
+  display: none;
+}
+
+#error-login[aria-hidden="false"] {
+  display: block;
 }
 
 .input-group img {
