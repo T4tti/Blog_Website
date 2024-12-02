@@ -11,7 +11,7 @@ const loginError = document.getElementById("error-login");
 // Xử lý sự kiện submit của form
 frmLogin.addEventListener("submit", function (e) {
   // Ngăn chặn sự kiện mặc định của form
-  e.preventDefault();
+  //e.preventDefault();
 
   // Cờ kiểm tra hợp lệ
   let isValid = true;
