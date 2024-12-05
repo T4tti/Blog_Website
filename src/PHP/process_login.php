@@ -1,66 +1,55 @@
 <?php
 session_start();
-require_once '../PHP/config.php'; // Giả sử bạn có file kết nối CSDL này
+require_once '../PHP/config.php';
 
-// Hàm kiểm tra và làm sạch dữ liệu đầu vào
 function sanitize_input($data) {
-    $data = trim($data);
-    $data = stripslashes($data);
-    $data = htmlspecialchars($data);
-    return $data;
+    return htmlspecialchars(trim(stripslashes($data)), ENT_QUOTES, 'UTF-8');
 }
 
-// Kiểm tra nếu form được submit
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Lấy và làm sạch dữ liệu từ form
-    $username_or_email = sanitize_input($_POST['username']);
-    $password = $_POST['password'];
+function redirect($url, $params = []) {
+    $queryString = $params ? '?' . http_build_query($params) : '';
+    header("Location: $url$queryString");
+    exit();
+}
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        // Chuẩn bị câu truy vấn để tìm người dùng
-        $stmt = $conn->prepare("SELECT * FROM taikhoan WHERE username = ? OR email = ?");
+        $username_or_email = sanitize_input($_POST['username']);
+        $password = $_POST['password'];
+
+        // Check for empty fields
+        if (empty($username_or_email) || empty($password)) {
+            redirect('../layouts/login.html', ['error' => 'Vui lòng điền đầy đủ thông tin']);
+        }
+
+        // Prepare and execute query
+        $stmt = $conn->prepare("SELECT id, username, email, password, role FROM taikhoan WHERE username = ? OR email = ?");
         $stmt->bind_param("ss", $username_or_email, $username_or_email);
         $stmt->execute();
         $result = $stmt->get_result();
 
-        // Kiểm tra xem người dùng có tồn tại không
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
 
-            // Kiểm tra mật khẩu
             if (password_verify($password, $user['password'])) {
-                // Đăng nhập thành công
+                session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['role'] = $user['role'];
-
-                // Chuyển hướng đến trang chính hoặc trang dashboard
-                header("Location: ../layouts/index.html");
-                $stmt->close();
-                exit();
+                $_SESSION['last_login'] = time();
+                
+                redirect('../layouts/index.html');
             } else {
-                // Mật khẩu không đúng
-                $_SESSION['login_error'] = "Tên người dùng hoặc mật khẩu không chính xác";
-                $stmt->close();
-                header("Location: ../layouts/login.html");
-                exit();
+                redirect('../layouts/login.html', ['pwd-error' => 'Mật khẩu không chính xác']);
             }
         } else {
-            // Không tìm thấy người dùng
-            $_SESSION['login_error'] = "Tên người dùng hoặc email không tồn tại";
-            $stmt->close();
-            header("Location: ../layouts/login.html");
-            exit();
+            redirect('../layouts/login.html', ['user-error' => 'Tài khoản không tồn tại']);
         }
     } catch (Exception $e) {
-        // Xử lý lỗi
         error_log("Lỗi đăng nhập: " . $e->getMessage());
-        $_SESSION['login_error'] = "Đã xảy ra lỗi. Vui lòng thử lại sau.";
-        header("Location: ../layouts/login.html");
-        exit();
+        redirect('../layouts/login.html', ['error' => 'Đã xảy ra lỗi, vui lòng thử lại']);
+    } finally {
+        $conn->close();
     }
-} else {
-    // Nếu truy cập trực tiếp vào file mà không phải từ form submit
-    header("Location: ../layouts/login.html");
-    exit();
 }
+?>

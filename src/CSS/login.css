@@ -1,3 +1,4 @@
+/* Đặt lại các giá trị mặc định */
 * {
   margin: 0;
   padding: 0;
@@ -16,20 +17,13 @@ body {
 
 .login-container {
   max-width: 400px;
-  margin: 0 auto;
   padding: 2rem;
-  text-align: center;
   background-color: #ffffff;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-}
-
-.logo {
   text-align: center;
-  margin-bottom: 1.5rem;
 }
 
-/* Logo styling */
 .logo img {
   width: 70px;
   height: 70px;
@@ -37,7 +31,6 @@ body {
 }
 
 h1 {
-  text-align: center;
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
   color: #333;
@@ -47,43 +40,39 @@ h1 {
   margin-bottom: 1.5rem;
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
-/* Container for img and input */
 .input-wrapper {
   display: flex;
   align-items: center;
   position: relative;
-  width: 100%;
-  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 4px;
-  padding: 0.5rem;
+  background-color: #fff;
 }
 
 .input-wrapper:focus-within {
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  border-color: #1a73e8;
+  box-shadow: 0 0 0 0.2rem rgba(26, 115, 232, 0.25);
 }
 
 .img-icon {
   width: 20px;
   height: 20px;
+  margin: 0 0.5rem;
 }
 
 .input-wrapper input {
   flex: 1;
   border: none;
   outline: none;
-  padding: 0.5rem;
+  padding: 0.75rem;
   font-size: 1rem;
-  background-color: #fff;
+  background-color: transparent;
 }
 
-input[type="password"] {
-  flex: 1;
-  padding-right: 40px; /* Để chừa không gian cho nút toggle */
+.input-wrapper input:focus {
+  outline: none;
 }
 
 .toggle-password {
@@ -92,15 +81,15 @@ input[type="password"] {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .toggle-password svg {
-  fill: #555; /* Màu biểu tượng */
+  fill: #555;
   transition: fill 0.3s ease;
+}
+
+.toggle-password:hover svg {
+  fill: #1a73e8;
 }
 
 .error {
@@ -118,39 +107,6 @@ input[type="password"] {
   color: #dc3545;
   text-align: left;
   margin-bottom: 1rem;
-  display: none;
-}
-
-#error-login[aria-hidden="false"] {
-  display: block;
-}
-
-.input-group img {
-  width: 50px; /* Adjust size as needed */
-  height: 44.2px;
-  border-bottom: 1px solid #ddd;
-  border-left: 1px solid #ddd;
-  border-top: 1px solid #ddd;
-  border-top-left-radius: 4px;
-  border-bottom-left-radius: 4px;
-  padding: 0.75rem;
-  background-color: rgb(235, 235, 244);
-}
-
-.input-group input {
-  flex: 1;
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid #ddd;
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  font-size: 1rem;
-  background-color: rgb(250, 250, 250);
-}
-
-.input-group input:focus {
-  outline: none;
-  border-color: #1a73e8;
 }
 
 .login-button {
@@ -182,17 +138,16 @@ input[type="password"] {
 }
 
 .social-login {
-  text-align: center;
   margin-top: 20px;
 }
 
 .social-login-text {
   color: #666;
   margin-bottom: 1rem;
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
 .social-login-text span {
@@ -219,43 +174,32 @@ input[type="password"] {
 }
 
 .social-button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   padding: 0.5rem 1rem;
   border: 1px solid #ddd;
   border-radius: 4px;
   background: white;
   color: #666;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   font-size: 0.9rem;
 }
 
 .social-button:hover {
-  background-color: #c2d9ef;
-  color: #5695e8;
-  border-color: #c2d9ef;
+  background-color: #eaf4fd;
+  border-color: #a0c4f9;
+  color: #0056b3;
 }
 
-.Error {
-  color: red;
-  font-size: 0.9rem;
-  text-align: left;
-  border: 1px solid #f0c9c9;
-  background-color: #f0c9c9;
-  padding: 0.5rem;
-  border-radius: 8px;
-  margin-bottom: 1rem;
-  display: none;
-}
-/* Fullscreen dynamic background */
+/* Dynamic background */
 .background {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Ensure it stays behind content */
+  z-index: -1;
   background: linear-gradient(
     45deg,
     #6bb328,
@@ -263,12 +207,11 @@ input[type="password"] {
     #6e2399,
     #e2748f,
     #2e8ea7
-  ); /* Gradient colors */
-  background-size: 400% 400%; /* Larger background for smooth movement */
-  animation: gradientMove 10s ease infinite; /* Animation for movement */
+  );
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
 }
 
-/* Gradient animation */
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;
