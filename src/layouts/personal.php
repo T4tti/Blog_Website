@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="../CSS/personal.css">
 </head>
 <body class="bg-light">
+    <div class="background"></div>
   <div class="container profile-container">
     <h2 class="text-center">Thông Tin Cá Nhân</h2>
     <p class="text-center text-muted">Quản lý thông tin tài khoản của bạn.</p>

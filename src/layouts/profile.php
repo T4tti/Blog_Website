@@ -84,7 +84,8 @@ if (!isset($_SESSION['username'])) {
             </p>
           </div>
         </div>
-        <button class="btn btn-info"> <a href="../layouts/personal.php">Sửa thông tin</a></button>
+        <a class="btn btn-info" href="../layouts/personal.php">Sửa thông tin</a>
+
       </div>
     </div>
     <hr />

@@ -53,31 +53,19 @@ body {
   height: 100%;
 }
 
-#btn-login {
-  border: 1px solid var(--primary-color);
-  border-radius: 4px;
-  padding: 0.5rem 1rem;
-  margin-left: 1rem;
-  color: var(--primary-color);
-  font-weight: bold;
+.btn-info {
+  border: 1px solid var(--primary-color); /* Đường viền với màu chủ đạo */
+  border-radius: 4px; /* Bo tròn nhẹ */
+  padding: 0.5rem 1rem; /* Khoảng cách bên trong nút */
+  margin-left: 1rem; /* Khoảng cách bên trái nút */
+  color: var(--primary-color); /* Màu chữ là màu chủ đạo */
+  font-weight: bold; /* In đậm chữ */
+  text-decoration: none; /* Bỏ gạch chân (áp dụng nếu dùng thẻ <a>) */
 }
 
-#btn-login:hover {
-  background: var(--primary-color);
-  color: white !important;
-}
-
-.btninfo {
-  background-color: #0056b3;
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.btninfo:hover {
-  background-color: #024791;
+.btn-info:hover {
+  background: var(--primary-color); /* Màu nền khi hover */
+  color: white !important; /* Màu chữ đổi thành trắng */
 }
 
 .card {
