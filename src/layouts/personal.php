@@ -10,7 +10,7 @@
 </head>
 <body class="bg-light">
   <div class="container profile-container">
-    <h2 class="text-center">Quản Lý Tài Khoản</h2>
+    <h2 class="text-center">Thông Tin Cá Nhân</h2>
     <p class="text-center text-muted">Quản lý thông tin tài khoản của bạn.</p>
 
     <!-- Tabs Navigation -->
