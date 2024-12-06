@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Prepare and execute query
-        $stmt = $conn->prepare("SELECT id, username, email, password, role FROM taikhoan WHERE username = ? OR email = ?");
+        $stmt = $conn->prepare("SELECT id, fullname, username, email, password, role FROM taikhoan WHERE username = ? OR email = ?");
         $stmt->bind_param("ss", $username_or_email, $username_or_email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -35,10 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 session_regenerate_id(true);
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
+                $_SESSION['fullname'] = $user['fullname'];
                 $_SESSION['role'] = $user['role'];
                 $_SESSION['last_login'] = time();
                 
-                redirect('../layouts/index.html');
+                redirect('../layouts/index.php');
             } else {
                 redirect('../layouts/login.html', ['pwd-error' => 'Mật khẩu không chính xác']);
             }

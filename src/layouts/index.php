@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -15,7 +18,7 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="index.php">
         <img src="../Assets/android-icon-48x48.png" alt="Logo" class="me-2" />
         VietTechBlog
       </a>
@@ -47,10 +50,26 @@
           </div>
         </form>
 
+        <!-- Kiểm tra trạng thái đăng nhập -->
+        <?php if (isset($_SESSION['username'])): ?>
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img src="../Assets/icons8-avatar-24.png" alt="User" class="me-2" />
+            <?php echo htmlspecialchars($_SESSION['username']); ?>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="../layouts/profile.php">Hồ sơ cá nhân</a></li>
+            <li><a class="dropdown-item" href="../layouts/createarticle.html">Viết bài</a></li>
+            <li><a class="dropdown-item text-danger" href="../PHP/logout.php">Đăng xuất</a></li>
+          </ul>
+        </div>
+        <?php else: ?>
         <a class="nav-link" href="login.html" id="btn-login">
           <img src="../Assets/icons8-login-24.png" alt="Login" class="me-2" />
           Đăng nhập/Đăng ký
         </a>
+        <?php endif; ?>
       </div>
     </div>
   </nav>
@@ -67,9 +86,9 @@
       <div class="row">
         <div class="col-md-4">
           <div class="card post-card">
-            <img src="/api/placeholder/400/200" alt="Post thumbnail" />
+            <img src="../Assets/Tech_trend.webp" alt="Post thumbnail" />
             <div class="card-body">
-              <h5 class="card-title">Xu hướng công nghệ 2024</h5>
+              <h5 class="card-title">Xu hướng công nghệ</h5>
               <p class="card-text">
                 Khám phá những xu hướng công nghệ mới nhất đang định hình
                 tương lai.
@@ -80,7 +99,7 @@
         </div>
         <div class="col-md-4">
           <div class="card post-card">
-            <img src="/api/placeholder/400/200" alt="Post thumbnail" />
+            <img src="../Assets/AI_python.jpg" alt="Post thumbnail" />
             <div class="card-body">
               <h5 class="card-title">Lập trình AI với Python</h5>
               <p class="card-text">
@@ -92,7 +111,7 @@
         </div>
         <div class="col-md-4">
           <div class="card post-card">
-            <img src="/api/placeholder/400/200" alt="Post thumbnail" />
+            <img src="../Assets/front-end.jpeg" alt="Post thumbnail" />
             <div class="card-body">
               <h5 class="card-title">Web Development 2024</h5>
               <p class="card-text">
@@ -100,39 +119,6 @@
               </p>
               <a href="#" class="btn btn-primary">Đọc thêm</a>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Categories -->
-  <section class="categories-section">
-    <div class="container">
-      <h2 class="text-center mb-5">Chủ Đề</h2>
-      <div class="row">
-        <div class="col-md-3">
-          <div class="category-card">
-            <img src="/api/placeholder/64/64" alt="Programming" class="mb-3" />
-            <h5>Lập Trình</h5>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="category-card">
-            <img src="/api/placeholder/64/64" alt="AI" class="mb-3" />
-            <h5>AI & ML</h5>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="category-card">
-            <img src="/api/placeholder/64/64" alt="Web Dev" class="mb-3" />
-            <h5>Web Development</h5>
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="category-card">
-            <img src="/api/placeholder/64/64" alt="Mobile Dev" class="mb-3" />
-            <h5>Mobile Development</h5>
           </div>
         </div>
       </div>
