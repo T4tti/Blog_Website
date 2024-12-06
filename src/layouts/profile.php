@@ -84,7 +84,7 @@ if (!isset($_SESSION['username'])) {
             </p>
           </div>
         </div>
-        <button class="btn btn-info">Sửa thông tin</button>
+        <button class="btn btn-info"> <a href="../layouts/personal.php">Sửa thông tin</a></button>
       </div>
     </div>
     <hr />
@@ -98,6 +98,12 @@ if (!isset($_SESSION['username'])) {
       <a href="#">Đang theo dõi</a>
       <a href="#">Người theo dõi</a>
     </div>
+    <hr />
+
+    <!-- Content -->
+     
+
+        
   </div>
   
   <!-- Footer -->
@@ -212,6 +218,9 @@ if (!isset($_SESSION['username'])) {
       </div>
     </div>
   </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+
+  </script>
 
 </body>
 </html>
