@@ -1,12 +1,6 @@
 <?php
 session_start();
 
-// Kiểm tra nếu chưa đăng nhập
-if (!isset($_SESSION['username'])) {
-    header("Location: ../layouts/login.html?error=access_denied");
-    exit();
-}
-
 // Kết nối cơ sở dữ liệu
 require_once '../PHP/config.php';
 
@@ -134,15 +128,15 @@ $conn->close();
         <p class="text-center text-muted">Quản lý thông tin tài khoản của bạn.</p>
         <ul class="nav nav-tabs mb-4" id="accountTabs" role="tablist">
             <li class="nav-item">
-                <button class="nav-link active" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button">Thông Tin Cá Nhân</button>
+                <button class="nav-link <?php echo (!isset($_GET['tab']) || $_GET['tab'] !== 'password') ? 'active' : ''; ?>" id="info-tab" data-bs-toggle="tab" data-bs-target="#info" type="button">Thông Tin Cá Nhân</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" id="password-tab" data-bs-toggle="tab" data-bs-target="#password" type="button">Đổi Mật Khẩu</button>
+                <button class="nav-link <?php echo (isset($_GET['tab']) && $_GET['tab'] === 'password') ? 'active' : ''; ?>" id="password-tab" data-bs-toggle="tab" data-bs-target="#password" type="button">Đổi Mật Khẩu</button>
             </li>
         </ul>
 
         <div class="tab-content">
-            <div class="tab-pane fade show active" id="info">
+            <div class="tab-pane fade <?php echo (!isset($_GET['tab']) || $_GET['tab'] !== 'password') ? 'show active' : ''; ?>" id="info">
                 <form method="POST">
                     <div class="mb-3">
                         <label for="fullname">Tên hiển thị</label>
@@ -168,7 +162,7 @@ $conn->close();
                 </form>
             </div>
 
-            <div class="tab-pane fade" id="password">
+            <div class="tab-pane fade <?php echo (isset($_GET['tab']) && $_GET['tab'] === 'password') ? 'show active' : ''; ?>" id="password">
                 <form method="POST" id="frm-pwd">
                     <div class="mb-3">
                         <label for="current_password">Mật khẩu hiện tại</label>

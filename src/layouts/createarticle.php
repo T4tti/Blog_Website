@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+// Kết nối cơ sở dữ liệu
+require_once '../PHP/config.php';
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,14 +30,26 @@
       <a href="#">Thảo Luận</a>
     </div>
     <div>
-      <img src="https://via.placeholder.com/30" alt="User" />
+      <!-- Kiểm tra trạng thái đăng nhập -->
+        <div class="dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            <img src="../Assets/icons8-avatar-24.png" alt="User" class="me-2" />
+            <?php echo htmlspecialchars($_SESSION['username']); ?>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="../layouts/profile.php">Hồ sơ cá nhân</a></li>
+            <li><a class="dropdown-item" href="../layouts/createarticle.php">Viết bài</a></li>
+            <li><a class="dropdown-item text-danger" href="../PHP/logout.php">Đăng xuất</a></li>
+          </ul>
+        </div>
     </div>
   </div>
   <div class="editor-container">
     <input type="text" class="editor-input" placeholder="Tiêu đề" />
 
     <div class="editor-toolbar1">
-      <input type="text" class="editor-input1" placeholder="Mô tả ngắn" />
+      <input type="text" class="editor-input1" placeholder="Thẻ bài viết" />
       <button method="POST" action="" class="toolbar-button" onclick="submitPost()">
         Xuất bản bài viết
       </button>

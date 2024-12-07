@@ -1,5 +1,14 @@
 <?php
 session_start();
+
+// Kiểm tra nếu chưa đăng nhập
+if (!isset($_SESSION['username'])) {
+    header("Location: ../layouts/login.html?error=access_denied");
+    exit();
+}
+$username = $_SESSION['username'];
+
+
 ?>
 <!DOCTYPE html>
 <html lang="vi">
@@ -60,7 +69,7 @@ session_start();
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li><a class="dropdown-item" href="../layouts/profile.php">Hồ sơ cá nhân</a></li>
-            <li><a class="dropdown-item" href="../layouts/createarticle.html">Viết bài</a></li>
+            <li><a class="dropdown-item" href="../layouts/createarticle.php">Viết bài</a></li>
             <li><a class="dropdown-item text-danger" href="../PHP/logout.php">Đăng xuất</a></li>
           </ul>
         </div>

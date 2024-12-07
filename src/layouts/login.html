@@ -141,6 +141,15 @@
       }
     });
 
+    window.onload = function () {
+      const urlParams = new URLSearchParams(window.location.search);
+
+      // Kiểm tra nếu có bất kỳ query parameters nào
+      if (urlParams.toString()) {
+        // Xóa tất cả query parameters
+        window.history.replaceState(null, '', window.location.pathname);
+      }
+    };
   </script>
 </body>
 
