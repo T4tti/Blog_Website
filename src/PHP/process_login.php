@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         // Prepare and execute query
-        $stmt = $conn->prepare("SELECT id, fullname, username, email, password, role FROM taikhoan WHERE username = ? OR email = ?");
+        $stmt = $conn->prepare("SELECT fullname, username, email, birth, gender, password, role FROM taikhoan WHERE username = ? OR email = ?");
         $stmt->bind_param("ss", $username_or_email, $username_or_email);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -37,6 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['fullname'] = $user['fullname'];
                 $_SESSION['role'] = $user['role'];
+                $_SESSION['birth'] = $user['birth'];
+                $_SESSION['gender'] = $user['gender'];
                 $_SESSION['last_login'] = time();
                 
                 redirect('../layouts/index.php');

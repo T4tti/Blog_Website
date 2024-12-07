@@ -13,10 +13,46 @@
 }
 
 .profile-picture img {
-  width: 100px; /* Tăng kích thước ảnh đại diện */
-  height: 100px;
+  width: 120px; /* Tăng kích thước ảnh đại diện */
+  height: 120px;
   border-radius: 30%;
   border: 2px solid #ddd;
+}
+
+.alert {
+  position: relative;
+  top: 20px; /* Khoảng cách từ trên xuống */
+  left: 50%; /* Căn giữa theo chiều ngang */
+  transform: translateX(-50%); /* Đẩy ngược lại 50% chiều rộng để căn giữa */
+  width: 692px; /* Chiều rộng alert */
+  padding: 15px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1050; /* Đảm bảo xuất hiện trên cùng */
+}
+
+.alert-success {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  color: #721c24;
+}
+
+.custom-error {
+  color: #dc3545;
+  font-size: 14px;
+  text-align: left;
+  margin-top: 0.25rem;
+  display: none;
+}
+.mb-3.invalid input {
+  border-color: #dc3545;
 }
 
 /* Dynamic background */
