@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="../CSS/login.css" />
-  <title>VietTechBlog - Login</title>
+  <title>Login | VietTechBlog</title>
   <link rel="icon" type="image/png" href="../Assets/favicon-32x32.png" sizes="32x32" />
 
 </head>
@@ -139,17 +139,10 @@
         errorLogin.textContent = loginError;
         errorLogin.style.display = "block";
       }
-    });
-
-    window.onload = function () {
-      const urlParams = new URLSearchParams(window.location.search);
-
-      // Kiểm tra nếu có bất kỳ query parameters nào
-      if (urlParams.toString()) {
-        // Xóa tất cả query parameters
-        window.history.replaceState(null, '', window.location.pathname);
+      else {
+        errorLogin.style.display = "none";
       }
-    };
+    });
   </script>
 </body>
 
