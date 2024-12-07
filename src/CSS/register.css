@@ -6,6 +6,10 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  background-image: url("../Assets/background.jpg"); /* Đường dẫn đến ảnh nền */
+  background-size: cover; /* Tự động thay đổi kích thước hình nền phù hợp */
+  background-position: center; /* Căn giữa ảnh nền */
+  background-repeat: no-repeat;
 }
 .logo {
   font-size: 32px;
