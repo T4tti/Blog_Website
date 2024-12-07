@@ -1,22 +1,15 @@
 <?php
 session_start();
 
-// Kiểm tra nếu chưa đăng nhập
-if (!isset($_SESSION['username'])) {
-    header("Location: ../layouts/login.html?error=access_denied");
-    exit();
-}
-$username = $_SESSION['username'];
-
-
 ?>
+
+
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>VietTechBlog</title>
   <link rel="icon" type="img/png" href="../Assets/favicon-32x32.png" sizes="favicon-32x32" />
   <link rel="stylesheet" href="../CSS/index.css" />
