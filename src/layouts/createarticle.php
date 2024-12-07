@@ -5,6 +5,7 @@ session_start();
 require_once '../PHP/config.php';
 
 
+
 ?>
 
 <!DOCTYPE html>
@@ -16,21 +17,39 @@ require_once '../PHP/config.php';
   <link rel="stylesheet" href="../CSS/createarticle.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.min.js"></script>
   <title>New Post | VietTechBlog</title>
   <link rel="icon" type="img/png" href="../Assets/favicon-32x32.png" sizes="favicon-32x32" />
 </head>
 
 <body>
-  <div class="navbar">
-    <div>
-      <a href="#">VIBLO</a>
-      <a href="#">Bài Viết</a>
-      <a href="#">Hỏi Đáp</a>
-      <a href="#">Thảo Luận</a>
-    </div>
-    <div>
-      <!-- Kiểm tra trạng thái đăng nhập -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.php">
+        <img src="../Assets/android-icon-48x48.png" alt="Logo" class="me-2" />
+        VietTechBlog
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="newest">Bài Viết</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="question">Hỏi Đáp</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="discussion">Thảo Luận</a>
+          </li>
+        </ul>
+
+        <!-- Kiểm tra trạng thái đăng nhập -->
+        <?php if (isset($_SESSION['username'])): ?>
         <div class="dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
             aria-expanded="false">
@@ -43,8 +62,16 @@ require_once '../PHP/config.php';
             <li><a class="dropdown-item text-danger" href="../PHP/logout.php">Đăng xuất</a></li>
           </ul>
         </div>
+        <?php else: ?>
+        <a class="nav-link" href="login.html" id="btn-login">
+          <img src="../Assets/icons8-login-24.png" alt="Login" class="me-2" />
+          Đăng nhập/Đăng ký
+        </a>
+        <?php endif; ?>
+      </div>
     </div>
-  </div>
+  </nav>
+
   <div class="editor-container">
     <input type="text" class="editor-input" placeholder="Tiêu đề" />
 
@@ -303,6 +330,7 @@ require_once '../PHP/config.php';
       // .catch(error => console.error("Error:", error));
     }
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
