@@ -1,0 +1,90 @@
+:root {
+  --primary-color: #337ab7;
+  --secondary-color: #2c3e50;
+  --text-color: #333;
+  --light-bg: #f8f9fa;
+  --nav-color: #706e6e;
+  --footer-bg: #0b1a33;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--light-bg);
+  margin: 0;
+  padding: 0;
+}
+
+/* Navbar Styles */
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 2rem;
+}
+.nav-item {
+  margin-right: 1rem;
+  font-weight: bold;
+}
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color) !important;
+}
+
+.nav-link {
+  color: var(--nav-color) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-color) !important;
+}
+
+.search-form {
+  position: relative;
+}
+
+.search-form .btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+.search-item {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.search-item h3 a {
+  text-decoration: none;
+  color: #007bff;
+}
+
+.search-item h3 a:hover {
+  text-decoration: underline;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #0b1a33;
+}
+
+.footer a.hover-white:hover {
+  color: #ffffff !important;
+  transition: color 0.3s ease;
+}
+
+.text-light-emphasis {
+  color: #dbe3e8 !important;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+}
+
+.text-light-emphasis {
+  color: rgba(255, 255, 255, 0.7);
+}

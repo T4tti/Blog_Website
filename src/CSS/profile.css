@@ -137,6 +137,15 @@ body {
   border: 1px solid #ddd; /* Tùy chỉnh border nếu cần */
   background-color: #fff; /* Nền trắng */
   border-radius: 5px; /* Bo tròn góc */
+  position: relative;
+}
+
+.post-content {
+  flex: 1;
+}
+
+.post-container .btn-danger {
+  white-space: nowrap;
 }
 
 .pagination .page-link {

@@ -41,6 +41,7 @@ $stmt->close();
   <title>Profile | VietTechBlog</title>
   <link rel="icon" type="image/png" href="../Assets/favicon-32x32.png" sizes="32x32" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="../CSS/profile.css" />
 </head>
 
@@ -59,7 +60,7 @@ $stmt->close();
       <div class="collapse navbar-collapse" id="navbarContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" href="newest">Bài Viết</a>
+            <a class="nav-link" href="../layouts/post.php">Bài Viết</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="question">Hỏi Đáp</a>
@@ -132,50 +133,60 @@ $stmt->close();
         <p>Không có bài viết nào.</p>
         <?php endif; ?>
         <?php foreach ($posts as $post): ?>
-        <div class="post-container border rounded mb-3">
-          <div class="post-content">
-            <p class="post-meta">
-              <img src="../Assets/icons8-avatar-20.png" alt="Avatar" class="avatar" />
-              <span id="author">
-                <?php echo htmlspecialchars($post['fullname']); ?>
-              </span>
-              <span id="date">
-                <?php echo date("h:i A, d/m/Y", strtotime($post['created_at'])); ?>
-              </span>
-            </p>
+        <div class="post-container border rounded mb-3 p-3">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="post-content">
+              <p class="post-meta mb-1">
+                <img src="../Assets/icons8-avatar-20.png" alt="Avatar" class="avatar" />
+                <span id="author">
+                  <?php echo htmlspecialchars($post['fullname']); ?>
+                </span>
+                <span id="date">
+                  <?php echo date("h:i A, d/m/Y", strtotime($post['created_at'])); ?>
+                </span>
+              </p>
 
-            <h5>
-              <a class="title" href="view_post.php?id=<?php echo $post['posts_id']; ?>">
-                <?php echo htmlspecialchars($post['title']); ?>
+              <h5>
+                <a class="title" href="view_post.php?id=<?php echo $post['posts_id']; ?>">
+                  <?php echo htmlspecialchars($post['title']); ?>
+                </a>
+              </h5>
+            </div>
+
+            <!-- Nút xóa bên phải -->
+            <div>
+              <a href="../PHP/delete_post.php?id=<?php echo $post['posts_id']; ?>" class="btn btn-sm btn-danger"
+                onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này?');">
+                <img src="../Assets/icons8-delete-20.png" alt="Delete" />
               </a>
-            </h5>
+            </div>
           </div>
         </div>
-        <hr>
         <?php endforeach; ?>
+
 
         <!-- Phân trang -->
         <?php
-        // Gọi mã phân trang
-        $total_posts_query = $conn->query("SELECT COUNT(*) AS total FROM baiviet");
-        $total_posts = $total_posts_query->fetch_assoc()['total'];
-        $total_pages = ceil($total_posts / $limit);
+          // Gọi mã phân trang
+          $total_posts_query = $conn->query("SELECT COUNT(*) AS total FROM baiviet");
+          $total_posts = $total_posts_query->fetch_assoc()['total'];
+          $total_pages = ceil($total_posts / $limit);
 
-        echo '<nav class="mt-4">';
-        echo '<ul class="pagination justify-content-center">';
-        if ($page > 1) {
-            echo '<li class="page-item"><a class="page-link" href="?page=' . ($page - 1) . '">&laquo; Trang trước</a></li>';
-        }
-        for ($i = 1; $i <= $total_pages; $i++) {
-            $active = ($i == $page) ? 'active' : '';
-            echo '<li class="page-item ' . $active . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
-        }
-        if ($page < $total_pages) {
-            echo '<li class="page-item"><a class="page-link" href="?page=' . ($page + 1) . '">Trang sau &raquo;</a></li>';
-        }
-        echo '</ul>';
-        echo '</nav>';
-        ?>
+          echo '<nav class="mt-4">';
+          echo '<ul class="pagination justify-content-center">';
+          if ($page > 1) {
+              echo '<li class="page-item"><a class="page-link" href="?page=' . ($page - 1) . '">&laquo; Trang trước</a></li>';
+          }
+          for ($i = 1; $i <= $total_pages; $i++) {
+              $active = ($i == $page) ? 'active' : '';
+              echo '<li class="page-item ' . $active . '"><a class="page-link" href="?page=' . $i . '">' . $i . '</a></li>';
+          }
+          if ($page < $total_pages) {
+              echo '<li class="page-item"><a class="page-link" href="?page=' . ($page + 1) . '">Trang sau &raquo;</a></li>';
+          }
+          echo '</ul>';
+          echo '</nav>';
+          ?>
       </main>
     </div>
     <div id="questions" class="section" style="display: none;">Không có gì ở đây</div>
@@ -216,7 +227,8 @@ $stmt->close();
           <h5 class="mb-4 text-white">Khám Phá</h5>
           <ul class="list-unstyled">
             <li class="mb-2">
-              <a href="../layouts/post.php" class="text-light-emphasis text-decoration-none hover-white">Bài viết mới</a>
+              <a href="../layouts/post.php" class="text-light-emphasis text-decoration-none hover-white">Bài viết
+                mới</a>
             </li>
             <li class="mb-2">
               <a href="#" class="text-light-emphasis text-decoration-none hover-white">Chủ đề hot</a>
@@ -332,7 +344,25 @@ $stmt->close();
     });
 
   </script>
+  <!-- Thông báo xóa thành công -->
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const message = urlParams.get('message');
 
+    if (message === 'deleted') {
+      Swal.fire({
+        icon: 'success',
+        title: 'Xóa thành công',
+        text: 'Bài viết đã được xóa!',
+        timer: 3000,
+        showConfirmButton: false
+      });
+    }
+
+    // Xóa tham số message khỏi URL
+    urlParams.delete('message');
+    window.history.replaceState({}, document.title, window.location.pathname);
+  </script>
 </body>
 
 </html>

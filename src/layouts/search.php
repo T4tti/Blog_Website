@@ -1,19 +1,20 @@
 <?php
+// Khởi động session
 session_start();
+require_once '../PHP/config.php'; 
 
 ?>
-
-
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VietTechBlog</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search | VietTechBlog</title>
   <link rel="icon" type="img/png" href="../Assets/favicon-32x32.png" sizes="favicon-32x32" />
-  <link rel="stylesheet" href="../CSS/index.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../CSS/search.css">
+
 </head>
 
 <body>
@@ -76,56 +77,32 @@ session_start();
     </div>
   </nav>
 
-  <!-- Banner -->
-  <section class="banner">
-    <img src="../Assets/000.png" alt="Hero Image" class="img-fluid" />
-  </section>
+  <!-- Kết quả tìm kiếm -->
+  <div class="container mt-5">
+    <h2>Kết quả tìm kiếm:</h2>
+    <div id="search-results">
+      <?php
+            if (isset($_GET['query'])) {
+                $query = $conn->real_escape_string($_GET['query']); // Tránh SQL Injection
 
-  <!-- Featured Posts -->
-  <section class="featured-posts">
-    <div class="container">
-      <h2 class="text-center mb-5">Bài Viết Nổi Bật</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card post-card">
-            <img src="../Assets/Tech_trend.webp" alt="Post thumbnail" />
-            <div class="card-body">
-              <h5 class="card-title">Xu hướng công nghệ AI </h5>
-              <p class="card-text">
-                Khám phá những xu hướng công nghệ mới nhất đang định hình
-                tương lai.
-              </p>
-              <a href="view_post.php?id=3" class="btn btn-primary">Đọc thêm</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card post-card">
-            <img src="../Assets/AI_python.jpg" alt="Post thumbnail" />
-            <div class="card-body">
-              <h5 class="card-title">Lập trình AI với Python</h5>
-              <p class="card-text">
-                Hướng dẫn chi tiết về việc xây dựng các mô hình AI đơn giản.
-              </p>
-              <a href="view_post.php?id=4" class="btn btn-primary">Đọc thêm</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card post-card">
-            <img src="../Assets/front-end.jpeg" alt="Post thumbnail" />
-            <div class="card-body">
-              <h5 class="card-title">Web Development 2024</h5>
-              <p class="card-text">
-                Những công nghệ và framework web phổ biến nhất năm 2024.
-              </p>
-              <a href="view_post.php?id=5" class="btn btn-primary">Đọc thêm</a>
-            </div>
-          </div>
-        </div>
-      </div>
+                // Truy vấn database
+                $sql = "SELECT * FROM baiviet WHERE title LIKE '%$query%' OR content LIKE '%$query%' LIMIT 20";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<div class='search-item'>";
+                        echo "<h3><a href='../layouts/post.php?id=" . $row['id'] . "'>" . htmlspecialchars($row['title']) . "</a></h3>";
+                        echo "<p>" . htmlspecialchars(substr($row['content'], 0, 150)) . "...</p>";
+                        echo "</div>";
+                    }
+                } else {
+                    echo "<p>Không tìm thấy kết quả nào phù hợp.</p>";
+                }
+            }
+            ?>
     </div>
-  </section>
+  </div>
 
   <!-- Footer -->
   <footer class="footer bg text-light">
@@ -156,7 +133,8 @@ session_start();
           <h5 class="mb-4 text-white">Khám Phá</h5>
           <ul class="list-unstyled">
             <li class="mb-2">
-              <a href="../layouts/post.php" class="text-light-emphasis text-decoration-none hover-white">Bài viết mới</a>
+              <a href="../layouts/post.php" class="text-light-emphasis text-decoration-none hover-white">Bài viết
+                mới</a>
             </li>
             <li class="mb-2">
               <a href="#" class="text-light-emphasis text-decoration-none hover-white">Chủ đề hot</a>
@@ -239,6 +217,7 @@ session_start();
       </div>
     </div>
   </footer>
+
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
