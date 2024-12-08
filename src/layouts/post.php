@@ -18,6 +18,7 @@ $stmt->bind_param("ii", $limit, $offset);
 $stmt->execute();
 $result = $stmt->get_result();
 $posts = $result->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
@@ -96,24 +97,26 @@ $posts = $result->fetch_all(MYSQLI_ASSOC);
 
     <main class="container mt-4">
         <h2>Danh Sách Bài Viết</h2>
+        <?php if (empty($posts)): ?>
+            <p>Không có bài viết nào.</p>
+        <?php endif; ?>
         <?php foreach ($posts as $post): ?>
-       <div class="post-container border rounded mb-3">
-            <div class="post-content">
-                <p class="post-meta">
-                     <img src="../Assets/icons8-avatar-20.png" alt="Avatar" class="avatar" />
-                    <span id="author"><?php echo htmlspecialchars($post['fullname']); ?></span>
-                    <span id="date"><?php echo date("h:i A, d/m/Y", strtotime($post['created_at'])); ?></span>
-                </p>
+            <div class="post-container border rounded mb-3">
+                <div class="post-content">
+                    <p class="post-meta">
+                        <img src="../Assets/icons8-avatar-20.png" alt="Avatar" class="avatar" />
+                        <span id="author"><?php echo htmlspecialchars($post['fullname']); ?></span>
+                        <span id="date"><?php echo date("h:i A, d/m/Y", strtotime($post['created_at'])); ?></span>
+                    </p>
 
-                <h5>
-                    <a class="title" href="view_post.php?id=<?php echo $post['posts_id']; ?>">
-                        <?php echo htmlspecialchars($post['title']); ?>
-                    </a>
-                </h5>
+                    <h5>
+                        <a class="title" href="view_post.php?id=<?php echo $post['posts_id']; ?>">
+                            <?php echo htmlspecialchars($post['title']); ?>
+                        </a>
+                    </h5>
+                </div>
             </div>
-        </div>
-
-        <hr>
+            <hr>
         <?php endforeach; ?>
 
         <!-- Phân trang -->

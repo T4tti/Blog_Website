@@ -88,6 +88,56 @@ body {
   color: var(--primary-color);
 }
 
+.post-meta {
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  gap: 0.5rem; /* Khoảng cách giữa Author và Date */
+}
+/* Style cho avatar */
+.avatar {
+  width: 20px; /* Chiều rộng */
+  height: 20px; /* Chiều cao */
+  border-radius: 50%; /* Bo tròn hình ảnh */
+  object-fit: cover; /* Cắt ảnh nếu cần để đảm bảo vừa khung */
+}
+
+#author {
+  color: #337ab7;
+  font-size: 12.8px;
+  margin: 0; /* Xóa margin mặc định */
+}
+
+#date {
+  color: rgb(146, 145, 145);
+  font-size: 12.8px;
+  margin: 0; /* Xóa margin mặc định */
+}
+
+/* Giảm padding post-container */
+.post-container {
+  padding: 0.5rem 1rem; /* Giảm padding trên dưới */
+  border: 1px solid #ddd; /* Tùy chỉnh border nếu cần */
+  background-color: #fff; /* Nền trắng */
+  border-radius: 5px; /* Bo tròn góc */
+}
+
+.pagination .page-link {
+  color: var(--primary-color);
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.pagination .page-link:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.pagination .active .page-link {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+
 .sidebar {
   display: flex;
   justify-content: center;
