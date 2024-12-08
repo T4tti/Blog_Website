@@ -9,6 +9,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
+// Lấy thông tin bài viết của người dùng bằng username
 $limit = 5;
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 $offset = ($page - 1) * $limit;
@@ -21,13 +22,15 @@ $stmt = $conn->prepare("
     ORDER BY p.created_at DESC
     LIMIT ? OFFSET ?
 ");
-$stmt->bind_param("ii", $limit, $offset, $_SESSION['username']);
+
+$stmt->bind_param("sii", $_SESSION['username'], $limit, $offset);
+
 $stmt->execute();
 $result = $stmt->get_result();
 $posts = $result->fetch_all(MYSQLI_ASSOC);
 $stmt->close();
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="vi">
@@ -36,9 +39,9 @@ $stmt->close();
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profile | VietTechBlog</title>
-  <link rel="stylesheet" href="../CSS/profile.css" />
   <link rel="icon" type="image/png" href="../Assets/favicon-32x32.png" sizes="32x32" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../CSS/profile.css" />
 </head>
 
 <body>
@@ -65,7 +68,7 @@ $stmt->close();
             <a class="nav-link" href="discussion">Thảo Luận</a>
           </li>
         </ul>
-        
+
         <form class="d-flex me-3">
           <div class="search-form">
             <input class="form-control" type="search" placeholder="Tìm kiếm..." aria-label="Search"
@@ -77,7 +80,8 @@ $stmt->close();
         </form>
         <!-- Dropdown hiển thị thông tin và Logout -->
         <div class="dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
+            aria-expanded="false">
             <img src="../Assets/icons8-avatar-24.png" alt="User" class="me-2" />
             <?php echo htmlspecialchars($_SESSION['username']); ?>
           </a>
@@ -85,7 +89,7 @@ $stmt->close();
             <li><a class="dropdown-item text-danger" href="../PHP/logout.php">Đăng xuất</a></li>
           </ul>
         </div>
-        
+
       </div>
     </div>
   </nav>
@@ -113,38 +117,41 @@ $stmt->close();
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <a href="#" class="active">Bài viết</a>
-      <a href="#">Câu hỏi</a>
-      <a href="#">Câu trả lời</a>
-      <a href="#">Bookmark</a>
-      <a href="#">Đang theo dõi</a>
-      <a href="#">Người theo dõi</a>
+      <a href="#" class="active" data-section="posts">Bài viết</a>
+      <a href="#" data-section="questions">Câu hỏi</a>
+      <a href="#" data-section="answers">Câu trả lời</a>
+      <a href="#" data-section="bookmarks">Bookmark</a>
+      <a href="#" data-section="following">Đang theo dõi</a>
+      <a href="#" data-section="followers">Người theo dõi</a>
     </div>
     <hr />
-
-    <!-- Content -->
-    <main class="container mt-4">
-        <h2>Danh Sách Bài Viết</h2>
+    <!-- Các section -->
+    <div id="posts" class="section"><!-- Content -->
+      <main class="container mt-4">
         <?php if (empty($posts)): ?>
-            <p>Không có bài viết nào.</p>
+        <p>Không có bài viết nào.</p>
         <?php endif; ?>
         <?php foreach ($posts as $post): ?>
-            <div class="post-container border rounded mb-3">
-                <div class="post-content">
-                    <p class="post-meta">
-                        <img src="../Assets/icons8-avatar-20.png" alt="Avatar" class="avatar" />
-                        <span id="author"><?php echo htmlspecialchars($post['fullname']); ?></span>
-                        <span id="date"><?php echo date("h:i A, d/m/Y", strtotime($post['created_at'])); ?></span>
-                    </p>
+        <div class="post-container border rounded mb-3">
+          <div class="post-content">
+            <p class="post-meta">
+              <img src="../Assets/icons8-avatar-20.png" alt="Avatar" class="avatar" />
+              <span id="author">
+                <?php echo htmlspecialchars($post['fullname']); ?>
+              </span>
+              <span id="date">
+                <?php echo date("h:i A, d/m/Y", strtotime($post['created_at'])); ?>
+              </span>
+            </p>
 
-                    <h5>
-                        <a class="title" href="view_post.php?id=<?php echo $post['posts_id']; ?>">
-                            <?php echo htmlspecialchars($post['title']); ?>
-                        </a>
-                    </h5>
-                </div>
-            </div>
-            <hr>
+            <h5>
+              <a class="title" href="view_post.php?id=<?php echo $post['posts_id']; ?>">
+                <?php echo htmlspecialchars($post['title']); ?>
+              </a>
+            </h5>
+          </div>
+        </div>
+        <hr>
         <?php endforeach; ?>
 
         <!-- Phân trang -->
@@ -169,11 +176,17 @@ $stmt->close();
         echo '</ul>';
         echo '</nav>';
         ?>
-    </main>
+      </main>
+    </div>
+    <div id="questions" class="section" style="display: none;">Không có gì ở đây</div>
+    <div id="answers" class="section" style="display: none;">Không có gì ở đây</div>
+    <div id="bookmarks" class="section" style="display: none;">Không có gì ở đây</div>
+    <div id="following" class="section" style="display: none;">Không có gì ở đây</div>
+    <div id="followers" class="section" style="display: none;">Không có gì ở đây</div>
+    <hr>
 
-        
   </div>
-  
+
   <!-- Footer -->
   <footer class="footer bg text-light">
     <div class="container py-5">
@@ -203,7 +216,7 @@ $stmt->close();
           <h5 class="mb-4 text-white">Khám Phá</h5>
           <ul class="list-unstyled">
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">Bài viết mới</a>
+              <a href="../layouts/post.php" class="text-light-emphasis text-decoration-none hover-white">Bài viết mới</a>
             </li>
             <li class="mb-2">
               <a href="#" class="text-light-emphasis text-decoration-none hover-white">Chủ đề hot</a>
@@ -267,7 +280,7 @@ $stmt->close();
         <div class="col-md-6 text-center text-md-end">
           <ul class="list-inline mb-0">
             <li class="list-inline-item">
-              <a href="#" class="text-white text-decoration-none hover-white">
+              <a href="../layouts/terms.html" class="text-white text-decoration-none hover-white">
                 Điều khoản sử dụng
               </a>
             </li>
@@ -286,9 +299,40 @@ $stmt->close();
       </div>
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Lấy tất cả các nút sidebar và các section
+      const sidebarLinks = document.querySelectorAll(".sidebar a");
+      const sections = document.querySelectorAll(".section");
+
+      // Lặp qua từng nút
+      sidebarLinks.forEach(link => {
+        link.addEventListener("click", function (event) {
+          event.preventDefault(); // Ngăn tải lại trang
+
+          // Xóa class 'active' khỏi tất cả các nút
+          sidebarLinks.forEach(link => link.classList.remove("active"));
+
+          // Thêm class 'active' vào nút được nhấn
+          this.classList.add("active");
+
+          // Ẩn tất cả các section
+          sections.forEach(section => {
+            section.style.display = "none";
+          });
+
+          // Hiển thị section tương ứng với nút được nhấn
+          const targetSection = document.getElementById(this.dataset.section);
+          if (targetSection) {
+            targetSection.style.display = "block";
+          }
+        });
+      });
+    });
 
   </script>
 
 </body>
+
 </html>

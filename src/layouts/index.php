@@ -90,12 +90,12 @@ session_start();
           <div class="card post-card">
             <img src="../Assets/Tech_trend.webp" alt="Post thumbnail" />
             <div class="card-body">
-              <h5 class="card-title">Xu hướng công nghệ</h5>
+              <h5 class="card-title">Xu hướng công nghệ AI </h5>
               <p class="card-text">
                 Khám phá những xu hướng công nghệ mới nhất đang định hình
                 tương lai.
               </p>
-              <a href="#" class="btn btn-primary">Đọc thêm</a>
+              <a href="view_post.php?id=3" class="btn btn-primary">Đọc thêm</a>
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@ session_start();
               <p class="card-text">
                 Hướng dẫn chi tiết về việc xây dựng các mô hình AI đơn giản.
               </p>
-              <a href="#" class="btn btn-primary">Đọc thêm</a>
+              <a href="view_post.php?id=4" class="btn btn-primary">Đọc thêm</a>
             </div>
           </div>
         </div>
@@ -119,7 +119,7 @@ session_start();
               <p class="card-text">
                 Những công nghệ và framework web phổ biến nhất năm 2024.
               </p>
-              <a href="#" class="btn btn-primary">Đọc thêm</a>
+              <a href="view_post.php?id=5" class="btn btn-primary">Đọc thêm</a>
             </div>
           </div>
         </div>
@@ -156,7 +156,7 @@ session_start();
           <h5 class="mb-4 text-white">Khám Phá</h5>
           <ul class="list-unstyled">
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">Bài viết mới</a>
+              <a href="../layouts/post.php" class="text-light-emphasis text-decoration-none hover-white">Bài viết mới</a>
             </li>
             <li class="mb-2">
               <a href="#" class="text-light-emphasis text-decoration-none hover-white">Chủ đề hot</a>
@@ -220,7 +220,7 @@ session_start();
         <div class="col-md-6 text-center text-md-end">
           <ul class="list-inline mb-0">
             <li class="list-inline-item">
-              <a href="#" class="text-white text-decoration-none hover-white">
+              <a href="../layouts/terms.html" class="text-white text-decoration-none hover-white">
                 Điều khoản sử dụng
               </a>
             </li>

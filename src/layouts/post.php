@@ -155,7 +155,7 @@ $stmt->close();
                 <div class="col-lg-2 col-md-4 mb-4">
                     <h5 class="mb-4 text-white">Khám Phá</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-light-emphasis text-decoration-none hover-white">Bài viết mới</a>
+                        <li><a href="../layouts/post.php" class="text-light-emphasis text-decoration-none hover-white">Bài viết mới</a>
                         </li>
                         <li><a href="#" class="text-light-emphasis text-decoration-none hover-white">Chủ đề hot</a></li>
                     </ul>
@@ -189,7 +189,7 @@ $stmt->close();
                 <div class="col-md-6 text-center text-md-end">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item">
-                            <a href="#" class="text-white text-decoration-none hover-white">
+                            <a href="../layouts/terms.html" class="text-white text-decoration-none hover-white">
                                 Điều khoản sử dụng
                             </a>
                         </li>
