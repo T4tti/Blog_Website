@@ -1,22 +1,45 @@
 <?php
+// admin.php
 session_start();
 
+require_once '../PHP/config.php';
+
+
+// Kiểm tra xem người dùng có phải admin không
+if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
+    header("Location: ../layouts/login.html?error=access_denied");
+    exit();
+}
+
+
+// Xóa bài viết
+if (isset($_POST['delete_post'])) {
+    $post_id = $_POST['post_id'];
+    $conn->query("DELETE FROM baiviet WHERE id = $post_id");
+}
+
+// Xóa tài khoản (trừ admin)
+if (isset($_POST['delete_user'])) {
+    $user_id = $_POST['user_id'];
+    $conn->query("DELETE FROM taikhoan WHERE id = $user_id AND role != 1");
+}
 ?>
 
-
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VietTechBlog</title>
-  <link rel="icon" type="img/png" href="../Assets/favicon-32x32.png" sizes="favicon-32x32" />
-  <link rel="stylesheet" href="../CSS/index.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <!-- Thêm Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Thêm CSS -->
+  <link rel="stylesheet" href="../CSS/admin.css">
 </head>
 
 <body>
+  <!-- Navbar -->
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
     <div class="container">
@@ -44,8 +67,8 @@ session_start();
 
         <form id="frm-search" class="d-flex me-3" action="../layouts/search.php" method="post">
           <div class="search-form">
-            <input class="form-control" type="search" placeholder="Tìm kiếm..." aria-label="Search" name="query" id="query"
-              style="width: 300px" />
+            <input class="form-control" type="search" placeholder="Tìm kiếm..." aria-label="Search" name="query"
+              id="query" style="width: 300px" />
             <button class="btn btn-primary" type="submit">
               <img src="../Assets/icons8-search-20.png" alt="Search" />
             </button>
@@ -81,65 +104,108 @@ session_start();
           </ul>
         </div>
         <?php else: ?>
-          <a class="nav-link" href="login.html" id="btn-login">
-            <img src="../Assets/icons8-login-24.png" alt="Login" class="me-2" />
-            Đăng nhập/Đăng ký
-          </a>
+        <a class="nav-link" href="login.html" id="btn-login">
+          <img src="../Assets/icons8-login-24.png" alt="Login" class="me-2" />
+          Đăng nhập/Đăng ký
+        </a>
         <?php endif; ?>
       </div>
     </div>
   </nav>
 
-  <!-- Banner -->
-  <section class="banner">
-    <img src="../Assets/000.png" alt="Hero Image" class="img-fluid" />
-  </section>
 
-  <!-- Featured Posts -->
-  <section class="featured-posts">
-    <div class="container">
-      <h2 class="text-center mb-5">Bài Viết Nổi Bật</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <div class="card post-card">
-            <img src="../Assets/Tech_trend.webp" alt="Post thumbnail" />
-            <div class="card-body">
-              <h5 class="card-title">Xu hướng công nghệ AI </h5>
-              <p class="card-text">
-                Khám phá những xu hướng công nghệ mới nhất đang định hình
-                tương lai.
-              </p>
-              <a href="view_post.php?id=3" class="btn btn-primary">Đọc thêm</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card post-card">
-            <img src="../Assets/AI_python.jpg" alt="Post thumbnail" />
-            <div class="card-body">
-              <h5 class="card-title">Lập trình AI với Python</h5>
-              <p class="card-text">
-                Hướng dẫn chi tiết về việc xây dựng các mô hình AI đơn giản.
-              </p>
-              <a href="view_post.php?id=4" class="btn btn-primary">Đọc thêm</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card post-card">
-            <img src="../Assets/front-end.jpeg" alt="Post thumbnail" />
-            <div class="card-body">
-              <h5 class="card-title">Web Development 2024</h5>
-              <p class="card-text">
-                Những công nghệ và framework web phổ biến nhất năm 2024.
-              </p>
-              <a href="view_post.php?id=5" class="btn btn-primary">Đọc thêm</a>
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="container my-5">
+    <h1 class="text-center mb-4">Quản lý Admin</h1>
+
+    <!-- Danh sách bài viết -->
+    <h2 class="mt-4">Danh sách Bài viết</h2>
+    <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+      <table class="table table-striped table-hover custom-table">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Tiêu đề</th>
+            <th>Người đăng</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+      $result = $conn->query("SELECT b.posts_id, b.title, a.username FROM baiviet b JOIN taikhoan a ON b.user_id = a.id");
+      while ($row = $result->fetch_assoc()):
+      ?>
+          <tr>
+            <td>
+              <?php echo $row['posts_id']; ?>
+            </td>
+            <td class="scrollable-td">
+                <a class="title" href="../layouts/view_post.php?id=<?php echo $row['posts_id']; ?>">
+                  <?php echo $row['title']; ?>
+                </a>
+            </td>
+            <td class="scrollable-td">
+              <?php echo $row['username']; ?>
+            </td>
+            <td>
+              <form method="POST">
+                <input type="hidden" name="post_id" value="<?php echo $row['posts_id']; ?>">
+                <button type="submit" name="delete_post" class="btn btn-danger btn-sm">Xóa</button>
+              </form>
+            </td>
+          </tr>
+          <?php endwhile; ?>
+        </tbody>
+      </table>
     </div>
-  </section>
+
+    <!-- Danh sách tài khoản -->
+    <h2 class="mt-4">Danh sách Tài khoản</h2>
+    <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+      <table class="table table-striped table-hover custom-table">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Tên người dùng</th>
+            <th>Vai trò</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+            $result = $conn->query("SELECT a.id, a.fullname, a.username, r.role_name FROM taikhoan a JOIN quyen r ON a.role = r.role_id");
+            while ($row = $result->fetch_assoc()):
+          ?>
+          <tr>
+            <td>
+              <?php echo $row['id']; ?>
+            </td>
+            <td class="scrollable-td">
+              <?php echo $row['username']; ?>
+            </td>
+            <td class="scrollable-td">
+              <?php echo $row['role_name']; ?>
+            </td>
+            <td>
+              <?php if ($row['role_name'] != 'admin'): ?>
+              <form method="POST">
+                <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
+                <button type="submit" name="delete_user" class="btn btn-danger btn-sm">Xóa</button>
+              </form>
+              <?php else: ?>
+              <span class="badge bg-success">Admin</span>
+              <?php endif; ?>
+            </td>
+          </tr>
+          <?php endwhile; ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <br>
+  <br>
+  <br>
+  <br>
 
   <!-- Footer -->
   <footer class="footer bg text-light">
@@ -170,7 +236,8 @@ session_start();
           <h5 class="mb-4 text-white">Khám Phá</h5>
           <ul class="list-unstyled">
             <li class="mb-2">
-              <a href="../layouts/post.php" class="text-light-emphasis text-decoration-none hover-white">Bài viết mới</a>
+              <a href="../layouts/post.php" class="text-light-emphasis text-decoration-none hover-white">Bài viết
+                mới</a>
             </li>
             <li class="mb-2">
               <a href="#" class="text-light-emphasis text-decoration-none hover-white">Chủ đề hot</a>
@@ -253,48 +320,11 @@ session_start();
       </div>
     </div>
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>        
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <!-- Check form search bar -->
-  <script>
-    const form = document.getElementById('frm-search');
-    const input =document.getElementById('query');
 
-    form.addEventListener('submit', (e) => {
-      if (input.value.trim() === '') {
-        e.preventDefault();
-        Swal.fire({
-          icon: 'alert',
-          title: 'Lỗi',
-          text: 'Vui lòng nhập từ khóa tìm kiếm!',
-          timer: 1000,
-          showConfirmButton: false
-        });
-      }
-    });
-  </script>
-
-  <!-- Check alert logout -->
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const logout = urlParams.get('logout');
-
-    if (logout === 'success') {
-      Swal.fire({
-        icon: 'success',
-        title: 'Đăng xuất thành công!',
-        text: 'Hẹn gặp lại bạn!',
-        timer: 2000,
-        showConfirmButton: false
-      });
-    }
-
-    // Xóa tham số logout khỏi URL
-    urlParams.delete('logout');
-    window.history.replaceState({}, document.title, window.location.pathname);
-
-  </script>
-
+  <!-- Thêm Bootstrap JavaScript -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
+
+<?php $conn->close(); ?>

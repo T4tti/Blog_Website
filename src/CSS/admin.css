@@ -1,0 +1,177 @@
+:root {
+  --primary-color: #337ab7;
+  --secondary-color: #2c3e50;
+  --text-color: #333;
+  --light-bg: #f8f9fa;
+  --nav-color: #706e6e;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: #f5f5f5;
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 2rem;
+  background-color: var(--light-bg);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.nav-item {
+  margin-right: 1rem;
+  font-weight: bold;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color) !important;
+}
+
+.nav-link {
+  color: var(--nav-color) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-color) !important;
+}
+
+.search-form {
+  position: relative;
+}
+
+.search-form .btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+.btn.btn-info {
+  border: 1px solid var(--primary-color) !important; /* Đường viền với màu chủ đạo */
+  border-radius: 4px; /* Bo tròn nhẹ */
+  padding: 0.5rem 1rem; /* Khoảng cách bên trong nút */
+  margin-left: 1rem; /* Khoảng cách bên trái nút */
+  color: var(--primary-color) !important; /* Màu chữ là màu chủ đạo */
+  font-weight: bold; /* In đậm chữ */
+  text-decoration: none; /* Bỏ gạch chân (áp dụng nếu dùng thẻ <a>) */
+}
+
+.btn.btn-info:hover {
+  background: var(--primary-color); /* Màu nền khi hover */
+  color: white !important; /* Màu chữ đổi thành trắng */
+}
+
+.card {
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #fff;
+}
+
+.img-fluid {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.title {
+  color: rgb(29, 29, 29);
+  text-decoration: none;
+}
+
+/* Container để giữ bảng và tạo thanh cuộn */
+.table-container {
+  position: relative;
+  border: 1px solid #ddd;
+  max-height: 400px; /* Giới hạn chiều cao của bảng */
+  overflow-y: auto; /* Tạo thanh cuộn dọc khi cần thiết */
+}
+
+/* Bảng tùy chỉnh */
+.custom-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Cố định phần tiêu đề bảng */
+.custom-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #343a40;
+  color: white;
+  z-index: 2;
+}
+
+/* Tạo thanh cuộn cho từng ô td nếu nội dung dài */
+.custom-table tbody td {
+  max-height: 60px; /* Chiều cao tối đa cho mỗi ô */
+  overflow-y: auto; /* Tạo thanh cuộn dọc trong ô td */
+  padding: 8px;
+  vertical-align: middle;
+}
+
+/* Giới hạn chiều rộng và tạo thanh cuộn ngang cho ô td nếu cần */
+.scrollable-td {
+  max-width: 300px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #1b2735;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer a.hover-white:hover {
+  color: #ffffff !important;
+  transition: color 0.3s ease;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.newsletter-form .form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f6f6f7;
+}
+
+.newsletter-form .form-control::placeholder {
+  color: #f6f6f7;
+}
+
+.newsletter-form .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0.5rem 1rem;
+  }
+
+  .footer-brand {
+    justify-content: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}

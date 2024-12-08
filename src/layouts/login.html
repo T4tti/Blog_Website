@@ -144,6 +144,22 @@
       }
     });
   </script>
+  <!-- Check error access_denied -->
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("error")) {
+      const error = urlParams.get("error");
+      if (error === "access_denied") {
+        const errorLogin = document.getElementById("error-login");
+        errorLogin.textContent = "Truy cập bị từ chối";
+        errorLogin.style.display = "block";
+      }
+    }
+
+    urlParams.delete("error");
+    window.history.replaceState({}, document.title, window.location.pathname);
+
+  </script>
 </body>
 
 </html>
