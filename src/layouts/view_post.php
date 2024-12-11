@@ -59,7 +59,7 @@ $conn->close();
                 <?php echo date("h:i A, d/m/Y", strtotime($created_at)); ?>
             </p>
             <div>
-                <?php echo nl2br(htmlspecialchars($content)); ?>
+                <?php echo nl2br($content); ?>
             </div>
         </div>
     </div>
