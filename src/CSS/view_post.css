@@ -14,43 +14,6 @@ body {
   padding: 0;
 }
 
-/* Navbar Styles */
-.navbar {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 2rem;
-}
-.nav-item {
-  margin-right: 1rem;
-  font-weight: bold;
-}
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-color) !important;
-}
-
-.nav-link {
-  color: var(--nav-color) !important;
-  font-weight: 500;
-  padding: 0.5rem 1rem !important;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: var(--primary-color) !important;
-}
-
-.search-form {
-  position: relative;
-}
-
-.search-form .btn {
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 100%;
-}
-
 /* Bố cục nội dung bài viết */
 .post {
   max-width: 800px;
@@ -75,34 +38,4 @@ body {
 .post div {
   line-height: 1.8; /* Tăng khoảng cách giữa các dòng */
   color: var(--text-color);
-}
-
-/* Footer */
-.footer {
-  background-color: var(--footer-bg);
-  color: var(--text-color);
-  padding: 2rem 0;
-}
-
-.footer ul {
-  padding: 0;
-  list-style: none;
-}
-
-.footer ul li {
-  margin-bottom: 0.5rem;
-}
-
-.footer a {
-  color: var(--text-light-emphasis);
-}
-
-.footer a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-.footer .divider {
-  margin: 1.5rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
 }

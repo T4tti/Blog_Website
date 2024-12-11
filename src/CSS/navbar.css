@@ -1,0 +1,60 @@
+:root {
+  --primary-color: #337ab7;
+  --secondary-color: #2c3e50;
+  --text-color: #333;
+  --light-bg: #f8f9fa;
+  --nav-color: #706e6e;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.navbar {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 0.5rem 2rem;
+}
+.nav-item {
+  margin-right: 1rem;
+  font-weight: bold;
+}
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-color) !important;
+}
+
+.nav-link {
+  color: var(--nav-color) !important;
+  font-weight: 500;
+  padding: 0.5rem 1rem !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--primary-color) !important;
+}
+.search-form {
+  position: relative;
+}
+
+.search-form .btn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+}
+
+#btn-login {
+  border: 1px solid var(--primary-color);
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-left: 1rem;
+}
+
+#btn-login:hover {
+  background: var(--primary-color);
+  color: white !important;
+}

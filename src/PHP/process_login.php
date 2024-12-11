@@ -17,11 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username_or_email = sanitize_input($_POST['username']);
         $password = $_POST['password'];
 
-        // Check for empty fields
-        if (empty($username_or_email) || empty($password)) {
-            redirect('../layouts/login.html', ['error' => 'Vui lòng điền đầy đủ thông tin']);
-        }
-
         // Prepare and execute query
         $stmt = $conn->prepare("SELECT fullname, username, email, birth, gender, password, role FROM taikhoan WHERE username = ? OR email = ?");
         $stmt->bind_param("ss", $username_or_email, $username_or_email);

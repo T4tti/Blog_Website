@@ -1,0 +1,43 @@
+.footer {
+  background-color: #0b1a33;
+}
+
+.footer a.hover-white:hover {
+  color: #ffffff !important;
+  transition: color 0.3s ease;
+}
+
+.text-light-emphasis {
+  color: #dbe3e8 !important;
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.social-links a:hover {
+  color: #ffffff !important;
+  transition: color 0.3s ease;
+}
+
+.newsletter-form .form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #f6f6f7;
+}
+
+.newsletter-form .form-control::placeholder {
+  color: #f6f6f7;
+}
+
+.newsletter-form .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+}
