@@ -3,30 +3,7 @@ body {
   margin: 0;
   background-color: #f4f4f9;
 }
-.navbar {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 0.5rem 2rem;
-}
-.nav-item {
-  margin-right: 1rem;
-  font-weight: bold;
-}
-.navbar-brand {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-color) !important;
-}
 
-.nav-link {
-  color: var(--nav-color) !important;
-  font-weight: 500;
-  padding: 0.5rem 1rem !important;
-  transition: color 0.3s ease;
-}
-
-.nav-link:hover {
-  color: var(--primary-color) !important;
-}
 .editor-container {
   max-width: 1700px;
   margin: 20px auto;
