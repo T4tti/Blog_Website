@@ -55,17 +55,16 @@ input[type="email"] {
   border-radius: 4px;
   font-size: 14px;
 }
-
-input[type="email"].invalid {
-  border-color: red;
-}
-
 .error {
   color: #dc3545 !important;
   font-size: 0.675rem;
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
   text-align: left;
+}
+
+input[type="email"].invalid {
+  border-color: red;
 }
 
 button {
