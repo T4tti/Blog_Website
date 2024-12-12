@@ -18,7 +18,8 @@ body {
   border-radius: 4px; /* Bo tròn nhẹ */
   padding: 0.5rem 1rem; /* Khoảng cách bên trong nút */
   margin-left: 1rem; /* Khoảng cách bên trái nút */
-  color: var(--primary-color) !important; /* Màu chữ là màu chủ đạo */
+  color: var(--primary-color) !important;
+  background-color: white !important; /* Màu chữ là màu chủ đạo */
   font-weight: bold; /* In đậm chữ */
   text-decoration: none; /* Bỏ gạch chân (áp dụng nếu dùng thẻ <a>) */
 }
@@ -126,6 +127,6 @@ body {
 
 @media (max-width: 576px) {
   .sidebar {
-    flex-direction: row;
+    flex-direction: column;
   }
 }

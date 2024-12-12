@@ -53,7 +53,7 @@
           </a>
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
             <li><a class="dropdown-item" href="../layouts/profile.php">Hồ sơ cá nhân</a></li>
-            <li><a class="dropdown-item" href="../layouts/createarticle.php">Viết bài</a></li>
+            <li><a class="dropdown-item" href="../layouts/createpost.php">Viết bài</a></li>
             <li><a class="dropdown-item text-danger" href="../PHP/logout.php">Đăng xuất</a></li>
           </ul>
         </div>
