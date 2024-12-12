@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="../CSS/navbar.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../CSS/navbar.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -46,7 +46,7 @@
         <!-- Kiểm tra trạng thái đăng nhập -->
         <?php if (isset($_SESSION['username']) &&  $_SESSION['role'] == 0): ?>
         <div class="dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
+          <a class="nav-link dropdown-toggle"  id="dropdownMenuLink" data-bs-toggle="dropdown"
             aria-expanded="false">
             <img src="../Assets/icons8-avatar-24.png" alt="User" class="me-2" />
             <?php echo htmlspecialchars($_SESSION['username']); ?>
@@ -59,7 +59,7 @@
         </div>
         <?php elseif (isset($_SESSION['username']) &&  $_SESSION['role'] == 1):?>
         <div class="dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
+          <a class="nav-link dropdown-toggle" id="dropdownMenuLink" data-bs-toggle="dropdown"
             aria-expanded="false">
             <img src="../Assets/icons8-avatar-24.png" alt="User" class="me-2" />
             <?php echo htmlspecialchars($_SESSION['username']); ?>
@@ -80,5 +80,6 @@
       </div>
     </div>
   </nav>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

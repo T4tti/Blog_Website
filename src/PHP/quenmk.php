@@ -1,7 +1,12 @@
 <?php
     session_start();
     require_once '../PHP/config.php';
-
+    
+    function redirect($url, $params = []) {
+        $queryString = $params ? '?' . http_build_query($params) : '';
+        header("Location: $url$queryString");
+        exit();
+    }
    // Hàm gửi email 
     function sendEmail($email, $verifycation_code) {
             require '../../PHPMailer-master/src/PHPMailer.php';
@@ -77,7 +82,7 @@
                 header("location: ../layouts/code.html");
             }
         } else {
-            echo "Email không tồn tại!";
+           redirect('../layouts/quenmk.html', ['email-error' => 'Đã xảy ra lỗi, vui lòng thử lại']);
         }
     
         $stmt->close();

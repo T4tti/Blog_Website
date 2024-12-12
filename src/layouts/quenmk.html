@@ -1,31 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="../CSS/quenmk.css" />
-  <title>Forgot-password</title>
+  <title>Quên Mật Khẩu | VietTechBlog</title>
   <link rel="icon" type="image/png" href="../Assets/favicon-32x32.png" sizes="32x32" />
+  <link rel="stylesheet" href="../CSS/quenmk.css" />
 </head>
 
 <body>
   <div class="container">
-    <img src="../Assets/ms-icon-70x70.png" alt="VietTechBlog" />
-    <div class="logo">VietTechBlog</div>
-    <div class="title">Quên mật khẩu!</div>
-    <div class="description">
-      Bạn quên mật khẩu của mình? Đừng lo lắng! Hãy cung cấp cho chúng tôi
-      email bạn sử dụng để đăng ký tài khoản VietTechBlog. Chúng tôi sẽ gửi
-      cho bạn một liên kết để đặt lại mật khẩu của bạn qua email đó.
-    </div>
+    <img src="../Assets/ms-icon-70x70.png" alt="VietTechBlog Logo" />
+    <h1 class="logo">VietTechBlog</h1>
+    <h2 class="title">Quên mật khẩu!</h2>
+    <p class="description">
+      Bạn quên mật khẩu của mình? Đừng lo lắng! Hãy cung cấp cho chúng tôi email bạn sử dụng để đăng ký tài khoản
+      VietTechBlog.
+      Chúng tôi sẽ gửi cho bạn một liên kết để đặt lại mật khẩu qua email đó.
+    </p>
     <form action="../PHP/quenmk.php" method="POST">
       <input type="email" id="email" name="email" placeholder="Địa chỉ email của bạn" required />
+      <div id="error-email" class="error"></div>
       <button type="submit" id="submitBtn" disabled>Gửi email cho tôi</button>
     </form>
   </div>
-  <!-- script -->
-  <script src="../JS/forgetPWD.js"></script>
+
+  <!-- JavaScript -->
+  <script>
+    const emailInput = document.getElementById("email");
+    const errorEmail = document.getElementById("error-email");
+    const submitBtn = document.getElementById("submitBtn");
+    // Hàm bật/tắt nút submit
+    function toggleSubmitButton() {
+      const isEmailFilled = emailInput.value.trim() !== "";
+      submitBtn.classList.toggle("enabled", isEmailFilled);
+      submitBtn.disabled = !isEmailFilled;
+    }
+    // Lắng nghe sự kiện input
+    emailInput.addEventListener("input", toggleSubmitButton);
+
+    // Lấy tham chiếu đến phần tử input và phần tử hiển thị lỗi
+
+    // Kiểm tra tham số "email-error" trong URL
+    // Kiểm tra tham số "email-error" trong URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has("email-error")) {
+      errorEmail.textContent = "Email không tồn tại";
+      emailInput.classList.add("invalid");
+      errorEmail.style.display = "block";
+
+      urlParams.delete("email-error");
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    emailInput.addEventListener("input", () => {
+      errorEmail.style.display = "none";
+      emailInput.classList.remove("invalid");
+    });
+  </script>
+
 </body>
 
 </html>
