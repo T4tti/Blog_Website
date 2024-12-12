@@ -75,6 +75,7 @@ body {
 }
 
 .sidebar a:hover {
+  text-decoration: none;
   background-color: #ccc;
   color: #666;
 }
