@@ -72,4 +72,9 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
     }
   });
+
+  const urlParams = new URLSearchParams(window.location.search);
+  if (urlParams.has("tab")) {
+    urlParams.delete("tab");
+  }
 });

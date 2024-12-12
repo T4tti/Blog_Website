@@ -55,7 +55,7 @@
         
         if ($stmt->num_rows > 0) {
 
-            $stmt = $conn->prepare("SELECT * FROM maxacnhan WHERE email = ?");
+            $stmt = $conn->prepare("SELECT * FROM maxacnhan WHERE user_id = (select id from taikhoan where email = ?)");
             $stmt->bind_param("s", $email);
             $stmt->execute();
             $stmt->store_result();
@@ -64,11 +64,11 @@
 
             if($stmt->num_rows > 0){
                 echo" đã tồn tại chỉ cập nhật";
-                $stmt = $conn->prepare("UPDATE maxacnhan SET macode = ? WHERE email = ?");
+                $stmt = $conn->prepare("UPDATE maxacnhan SET macode = ? WHERE user_id = (select id from taikhoan where email = ?)");
                 $stmt->bind_param("ss", $verifycation_code, $email);
             }else{
                 echo"alert 'ko tồn tại thêm vào'";
-                $stmt = $conn->prepare("INSERT INTO maxacnhan (macode, email) VALUES (?, ?)");
+                $stmt = $conn->prepare("INSERT INTO maxacnhan (macode, user_id) VALUES (?, (select id from taikhoan where email = ?))");
                 $stmt->bind_param("ss", $verifycation_code  , $email);
             }
             $stmt->execute();

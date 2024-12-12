@@ -42,7 +42,7 @@ $stmt->close();
   <link rel="icon" type="image/png" href="../Assets/favicon-32x32.png" sizes="32x32" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link rel="stylesheet" href="../CSS/profile.css"/>
+  <link rel="stylesheet" href="../CSS/profile.css">
 </head>
 
 <body>
@@ -79,7 +79,7 @@ $stmt->close();
       <a href="#" data-section="following">Đang theo dõi</a>
       <a href="#" data-section="followers">Người theo dõi</a>
     </div>
-    
+
     <hr />
     <!-- Các section -->
     <div id="posts" class="section"><!-- Content -->

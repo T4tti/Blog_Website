@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = $_POST['password'];
 
         // Prepare and execute query
-        $stmt = $conn->prepare("SELECT fullname, username, email, birth, gender, password, role FROM taikhoan WHERE username = ? OR email = ?");
+        $stmt = $conn->prepare("SELECT id,fullname, username, email, birth, gender, password, role FROM taikhoan WHERE username = ? OR email = ?");
         $stmt->bind_param("ss", $username_or_email, $username_or_email);
         $stmt->execute();
         $result = $stmt->get_result();

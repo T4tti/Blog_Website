@@ -12,8 +12,8 @@ session_start();
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VietTechBlog</title>
   <link rel="icon" type="img/png" href="../Assets/favicon-32x32.png" sizes="favicon-32x32" />
-  <link rel="stylesheet" href="../CSS/index.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../CSS/index.css" />
 </head>
 
 <body>

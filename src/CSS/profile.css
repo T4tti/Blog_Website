@@ -19,13 +19,13 @@ body {
   padding: 0.5rem 1rem; /* Khoảng cách bên trong nút */
   margin-left: 1rem; /* Khoảng cách bên trái nút */
   color: var(--primary-color) !important;
-  background-color: whitesmoke !important; /* Màu chữ là màu chủ đạo */
+  background: whitesmoke !important; /* Màu chữ là màu chủ đạo */
   font-weight: bold; /* In đậm chữ */
   text-decoration: none; /* Bỏ gạch chân (áp dụng nếu dùng thẻ <a>) */
 }
 
 .btn.btn-info:hover {
-  background: var(--primary-color); /* Màu nền khi hover */
+  background: var(--primary-color) !important; /* Màu nền khi hover */
   color: white !important; /* Màu chữ đổi thành trắng */
 }
 
@@ -60,10 +60,8 @@ body {
   flex-direction: row;
   gap: 10px;
   padding: 20px;
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  border: none;
 }
 
 .sidebar a {
