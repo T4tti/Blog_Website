@@ -40,8 +40,8 @@ $stmt->close();
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Profile | VietTechBlog</title>
   <link rel="icon" type="image/png" href="../Assets/favicon-32x32.png" sizes="32x32" />
-  <link rel="stylesheet" href="../CSS/profile.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../CSS/profile.css" />
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
 </head>

@@ -19,7 +19,7 @@ body {
   padding: 0.5rem 1rem; /* Khoảng cách bên trong nút */
   margin-left: 1rem; /* Khoảng cách bên trái nút */
   color: var(--primary-color) !important;
-  background-color: white !important; /* Màu chữ là màu chủ đạo */
+  background-color: whitesmoke !important; /* Màu chữ là màu chủ đạo */
   font-weight: bold; /* In đậm chữ */
   text-decoration: none; /* Bỏ gạch chân (áp dụng nếu dùng thẻ <a>) */
 }
@@ -55,20 +55,33 @@ body {
   gap: 0.5rem; /* Khoảng cách giữa Author và Date */
 }
 
-/* Side bar */
-.sidebar a {
-  transition: background-color 0.3s, color 0.3s;
-  padding: 0.5rem 1rem;
+.sidebar {
   display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  flex-direction: row;
+  gap: 10px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.sidebar a:hover,
-.sidebar a.active {
+.sidebar a {
   text-decoration: none;
-  background-color: var(--primary-color);
-  color: white;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #ccc;
+  color: #666;
+}
+
+.sidebar a.active {
+  background-color: #337ab7;
+  color: #fff;
 }
 
 /* Style cho avatar */
@@ -123,10 +136,4 @@ body {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
   color: #fff;
-}
-
-@media (max-width: 576px) {
-  .sidebar {
-    flex-direction: column;
-  }
 }
