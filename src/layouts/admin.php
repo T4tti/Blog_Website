@@ -15,7 +15,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] != 1) {
 // Xóa bài viết
 if (isset($_POST['delete_post'])) {
     $post_id = $_POST['post_id'];
-    $conn->query("DELETE FROM baiviet WHERE id = $post_id");
+    $conn->query("DELETE FROM baiviet WHERE posts_id = $post_id");
 }
 
 // Xóa tài khoản (trừ admin)
@@ -79,7 +79,7 @@ if (isset($_POST['delete_user'])) {
             <td>
               <form method="POST">
                 <input type="hidden" name="post_id" value="<?php echo $row['posts_id']; ?>">
-                <button type="submit" name="delete_post" class="btn btn-danger btn-sm">Xóa</button>
+                <button type="submit" name="delete_post" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này không?')">Xóa</button>
               </form>
             </td>
           </tr>
@@ -119,7 +119,7 @@ if (isset($_POST['delete_user'])) {
               <?php if ($row['role_name'] != 'admin'): ?>
               <form method="POST">
                 <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
-                <button type="submit" name="delete_user" class="btn btn-danger btn-sm">Xóa</button>
+                <button type="submit" name="delete_user" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này không?')">Xóa</button>
               </form>
               <?php else: ?>
               <span class="badge bg-success">Admin</span>
