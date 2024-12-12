@@ -32,11 +32,14 @@ if (isset($_POST['delete_user'])) {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Panel</title>
-   <!-- Thêm CSS -->
-  <link rel="stylesheet" href="../CSS/admin.css">
+  <!-- SweetAlert2 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+  <!-- SweetAlert2 JS -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <!-- Thêm Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
- 
+  <link rel="stylesheet" href="../CSS/admin.css">
+
 </head>
 
 <body>
@@ -69,17 +72,19 @@ if (isset($_POST['delete_user'])) {
               <?php echo $row['posts_id']; ?>
             </td>
             <td class="scrollable-td">
-                <a class="title" href="../layouts/view_post.php?id=<?php echo $row['posts_id']; ?>">
-                  <?php echo $row['title']; ?>
-                </a>
+              <a class="title" href="../layouts/view_post.php?id=<?php echo $row['posts_id']; ?>">
+                <?php echo $row['title']; ?>
+              </a>
             </td>
             <td class="scrollable-td">
               <?php echo $row['username']; ?>
             </td>
             <td>
-              <form method="POST">
+              <button type="button" class="btn btn-danger btn-sm"
+                onclick="confirmDeletePost(<?php echo $row['posts_id']; ?>)">Xóa</button>
+              <form id="delete-post-<?php echo $row['posts_id']; ?>" method="POST" style="display: none;">
                 <input type="hidden" name="post_id" value="<?php echo $row['posts_id']; ?>">
-                <button type="submit" name="delete_post" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này không?')">Xóa</button>
+                <input type="hidden" name="delete_post" value="1">
               </form>
             </td>
           </tr>
@@ -117,9 +122,11 @@ if (isset($_POST['delete_user'])) {
             </td>
             <td>
               <?php if ($row['role_name'] != 'admin'): ?>
-              <form method="POST">
+              <button type="button" class="btn btn-danger btn-sm"
+                onclick="confirmDeleteUser(<?php echo $row['id']; ?>)">Xóa</button>
+              <form id="delete-user-<?php echo $row['id']; ?>" method="POST" style="display: none;">
                 <input type="hidden" name="user_id" value="<?php echo $row['id']; ?>">
-                <button type="submit" name="delete_user" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc chắn muốn xóa tài khoản này không?')">Xóa</button>
+                <input type="hidden" name="delete_user" value="1">
               </form>
               <?php else: ?>
               <span class="badge bg-success">Admin</span>
@@ -142,6 +149,41 @@ if (isset($_POST['delete_user'])) {
 
   <!-- Thêm Bootstrap JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function confirmDeletePost(postId) {
+      Swal.fire({
+        title: 'Bạn có chắc chắn?',
+        text: "Hành động này không thể hoàn tác!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Xóa',
+        cancelButtonText: 'Hủy'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById(`delete-post-${postId}`).submit();
+        }
+      });
+    }
+
+    function confirmDeleteUser(userId) {
+      Swal.fire({
+        title: 'Bạn có chắc chắn?',
+        text: "Tài khoản này sẽ bị xóa vĩnh viễn!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Xóa',
+        cancelButtonText: 'Hủy'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById(`delete-user-${userId}`).submit();
+        }
+      });
+    }
+  </script>
 </body>
 
 </html>
