@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th12 08, 2024 lúc 05:31 PM
+-- Thời gian đã tạo: Th12 12, 2024 lúc 10:03 AM
 -- Phiên bản máy phục vụ: 10.4.32-MariaDB
 -- Phiên bản PHP: 8.2.12
 
@@ -62,16 +62,15 @@ INSERT INTO `baiviet` (`posts_id`, `user_id`, `title`, `content`, `created_at`) 
 CREATE TABLE `maxacnhan` (
   `id` int(11) NOT NULL,
   `macode` varchar(6) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL
+  `user_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `maxacnhan`
 --
 
-INSERT INTO `maxacnhan` (`id`, `macode`, `email`) VALUES
-(1, '9aedea', 'tai.lenguyenthanh14902@gmail.com'),
-(2, 'a09fe6', '22022001@st.vlute.edu.vn');
+INSERT INTO `maxacnhan` (`id`, `macode`, `user_id`) VALUES
+(3, '24980b', 4);
 
 -- --------------------------------------------------------
 
@@ -141,7 +140,8 @@ ALTER TABLE `baiviet`
 -- Chỉ mục cho bảng `maxacnhan`
 --
 ALTER TABLE `maxacnhan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_maxacnhan_taikhoan` (`user_id`);
 
 --
 -- Chỉ mục cho bảng `quyen`
@@ -166,19 +166,19 @@ ALTER TABLE `taikhoan`
 -- AUTO_INCREMENT cho bảng `baiviet`
 --
 ALTER TABLE `baiviet`
-  MODIFY `posts_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `posts_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT cho bảng `maxacnhan`
 --
 ALTER TABLE `maxacnhan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `taikhoan`
 --
 ALTER TABLE `taikhoan`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -189,6 +189,12 @@ ALTER TABLE `taikhoan`
 --
 ALTER TABLE `baiviet`
   ADD CONSTRAINT `fk_baiviet_taikhoan` FOREIGN KEY (`user_id`) REFERENCES `taikhoan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Các ràng buộc cho bảng `maxacnhan`
+--
+ALTER TABLE `maxacnhan`
+  ADD CONSTRAINT `fk_maxacnhan_taikhoan` FOREIGN KEY (`user_id`) REFERENCES `taikhoan` (`id`);
 
 --
 -- Các ràng buộc cho bảng `taikhoan`
