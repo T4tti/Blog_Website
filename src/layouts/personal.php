@@ -68,9 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 throw new Exception("Mật khẩu mới và xác nhận không khớp.");
             }
 
-            // Kiểm tra mật khẩu mạnh
-            if (!preg_match('/[!@#$%^&*(),.?":{}|<>]{8,}/', $new_password)) {
-                throw new Exception("Mật khẩu phải ít nhất 8 ký tự, ít nhát có một ký tự đặc biệt.");
+            if (!preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/', $new_password)) {
+                throw new Exception("Mật khẩu phải ít nhất 8 ký tự, bao gồm chữ cái, số và ít nhất một ký tự đặc biệt.");
             }
 
             // Nếu không phải quên mật khẩu, kiểm tra mật khẩu hiện tại

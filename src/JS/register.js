@@ -73,7 +73,10 @@ function validateForm() {
   );
   let passwordsMatch = password.value === confirmPassword.value;
   let passwordValid =
-    password.value.length >= 8 && /[!@#$%^&*(),.?":{}|<>]/.test(password.value);
+    password.value.length >= 8 &&
+    /[a-z]/.test(password.value) && // Ít nhất một chữ cái viết thường
+    /\d/.test(password.value) && // Ít nhất một chữ số
+    /[!@#$%^&*(),.?":{}|<>]/.test(password.value); // Ít nhất một ký tự đặc biệt
   return allFilled && passwordsMatch && passwordValid && termsCheckbox.checked;
 }
 

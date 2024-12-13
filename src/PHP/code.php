@@ -3,7 +3,7 @@
     require_once '../PHP/config.php';
 
     function redirect($url, $params = []) {
-    $queryString = $params ? '?' . http_build_query($params) : '';
+    $queryString = $params ? '&' . http_build_query($params) : '';
     header("Location: $url$queryString");
     exit();
 }
