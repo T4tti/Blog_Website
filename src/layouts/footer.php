@@ -102,7 +102,7 @@
         <div class="col-md-6 text-center text-md-end">
           <ul class="list-inline mb-0">
             <li class="list-inline-item">
-              <a href="../layouts/terms.html" class="text-white text-decoration-none hover-white">
+              <a href="../layouts/terms.php" class="text-white text-decoration-none hover-white">
                 Điều khoản sử dụng
               </a>
             </li>

@@ -26,10 +26,10 @@
             <a class="nav-link" href="../layouts/post.php">Bài Viết</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="question">Hỏi Đáp</a>
+            <a class="nav-link" href="../layouts/comingsoon.html">Hỏi Đáp</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="discussion">Thảo Luận</a>
+            <a class="nav-link" href="../layouts/comingsoon.html">Thảo Luận</a>
           </li>
         </ul>
 
