@@ -41,13 +41,13 @@
               <a href="../layouts/post.php" class="text-light-emphasis text-decoration-none hover-white">Bài viết mới</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">Chủ đề hot</a>
+              <a href="../layouts/comingsoon.html" class="text-light-emphasis text-decoration-none hover-white">Chủ đề hot</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">Series bài viết</a>
+              <a href="../layouts/comingsoon.html" class="text-light-emphasis text-decoration-none hover-white">Series bài viết</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">Tác giả tiêu biểu</a>
+              <a href="../layouts/comingsoon.html" class="text-light-emphasis text-decoration-none hover-white">Tác giả tiêu biểu</a>
             </li>
           </ul>
         </div>
@@ -57,16 +57,16 @@
           <h5 class="mb-4 text-white">Chủ Đề</h5>
           <ul class="list-unstyled">
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">Lập trình</a>
+              <a href="../layouts/comingsoon.html" class="text-light-emphasis text-decoration-none hover-white">Lập trình</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">AI & Machine Learning</a>
+              <a href="../layouts/comingsoon.html" class="text-light-emphasis text-decoration-none hover-white">AI & Machine Learning</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">Web Development</a>
+              <a href="../layouts/comingsoon.html" class="text-light-emphasis text-decoration-none hover-white">Web Development</a>
             </li>
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">Mobile Development</a>
+              <a href="../layouts/comingsoon.html" class="text-light-emphasis text-decoration-none hover-white">Mobile Development</a>
             </li>
           </ul>
         </div>
@@ -76,12 +76,12 @@
           <h5 class="mb-3 text-white">Hỗ Trợ</h5>
           <ul class="list-unstyled">
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">
+              <a href="../layouts/comingsoon.html" class="text-light-emphasis text-decoration-none hover-white">
                 Trung tâm trợ giúp
               </a>
             </li>
             <li class="mb-2">
-              <a href="#" class="text-light-emphasis text-decoration-none hover-white">
+              <a href="../layouts/comingsoon.html" class="text-light-emphasis text-decoration-none hover-white">
                 Liên hệ hỗ trợ
               </a>
             </li>
@@ -107,12 +107,12 @@
               </a>
             </li>
             <li class="list-inline-item ms-3">
-              <a href="#" class="text-white text-decoration-none hover-white">
+              <a href="../layouts/comingsoon.html" class="text-white text-decoration-none hover-white">
                 Chính sách bảo mật
               </a>
             </li>
             <li class="list-inline-item ms-3">
-              <a href="#" class="text-white text-decoration-none hover-white">
+              <a href="../layouts/comingsoon.html" class="text-white text-decoration-none hover-white">
                 Cookie Policy
               </a>
             </li>
