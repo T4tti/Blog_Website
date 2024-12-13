@@ -1,0 +1,138 @@
+:root {
+  --primary-color: #337ab7;
+  --secondary-color: #2c3e50;
+  --text-color: #333;
+  --light-bg: #f8f9fa;
+  --nav-color: #706e6e;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: #f5f5f5;
+}
+
+.btn.btn-info {
+  border: 1px solid var(--primary-color) !important; /* Đường viền với màu chủ đạo */
+  border-radius: 4px; /* Bo tròn nhẹ */
+  padding: 0.5rem 1rem; /* Khoảng cách bên trong nút */
+  margin-left: 1rem; /* Khoảng cách bên trái nút */
+  color: var(--primary-color) !important;
+  background: whitesmoke !important; /* Màu chữ là màu chủ đạo */
+  font-weight: bold; /* In đậm chữ */
+  text-decoration: none; /* Bỏ gạch chân (áp dụng nếu dùng thẻ <a>) */
+}
+
+.btn.btn-info:hover {
+  background: var(--primary-color) !important; /* Màu nền khi hover */
+  color: white !important; /* Màu chữ đổi thành trắng */
+}
+
+.card {
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  background-color: #fff;
+}
+
+.img-fluid {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.post-meta {
+  display: flex;
+  align-items: center; /* Căn giữa theo chiều dọc */
+  gap: 0.5rem; /* Khoảng cách giữa Author và Date */
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: none;
+}
+
+.sidebar a {
+  text-decoration: none;
+  color: #333;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover {
+  text-decoration: none;
+  background-color: #ccc;
+  color: #666;
+}
+
+.sidebar a.active {
+  background-color: #337ab7;
+  color: #fff;
+}
+
+/* Style cho avatar */
+.avatar {
+  width: 20px; /* Chiều rộng */
+  height: 20px; /* Chiều cao */
+  border-radius: 50%; /* Bo tròn hình ảnh */
+  object-fit: cover; /* Cắt ảnh nếu cần để đảm bảo vừa khung */
+}
+
+#author {
+  color: #337ab7;
+  font-size: 12.8px;
+  margin: 0; /* Xóa margin mặc định */
+}
+
+#date {
+  color: rgb(146, 145, 145);
+  font-size: 12.8px;
+  margin: 0; /* Xóa margin mặc định */
+}
+
+/* Giảm padding post-container */
+.post-container {
+  padding: 0.5rem 1rem; /* Giảm padding trên dưới */
+  border: 1px solid #ddd; /* Tùy chỉnh border nếu cần */
+  background-color: #fff; /* Nền trắng */
+  border-radius: 5px; /* Bo tròn góc */
+  position: relative;
+}
+
+.post-content {
+  flex: 1;
+}
+
+.post-container .btn-danger {
+  white-space: nowrap;
+}
+
+.pagination .page-link {
+  color: var(--primary-color);
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.pagination .page-link:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.pagination .active .page-link {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}

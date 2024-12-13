@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register | VietTechBlog</title>
+  <link rel="icon" type="image/png" href="../Assets/favicon-32x32.png" sizes="32x32" />
+  <link rel="stylesheet" href="../CSS/register.css" />
+</head>
+
+<body>
+  <div class="container">
+    <img src="../Assets/ms-icon-70x70.png" alt="" />
+    <div class="logo">VietTechBlog</div>
+    <div class="title">Đăng ký tài khoản cho VietTechBlog</div>
+    <div class="description">
+      Chào mừng bạn đến <strong>Nền tảng VietTechBlog!</strong> Tham gia cùng
+      chúng tôi để tìm kiếm thông tin hữu ích cần thiết để cải thiện kỹ năng
+      IT của bạn. Vui lòng điền thông tin của bạn vào biểu mẫu bên dưới để
+      tiếp tục.
+    </div>
+    <form id="registerForm" method="post" action="../PHP/process_registration.php">
+      <div class="input-container">
+        <input name="fullname" type="text" placeholder="Tên của bạn" id="name" required />
+        <div class="warning">Tên là bắt buộc</div>
+      </div>
+      <div class="input-container">
+        <input name="email" type="email" placeholder="Địa chỉ email của bạn" id="email" required />
+        <div class="warning">Email là bắt buộc</div>
+      </div>
+      <div class="input-container">
+        <input name="username" type="text" placeholder="Tên tài khoản" id="username" required />
+        <div class="warning">Tên tài khoản là bắt buộc</div>
+      </div>
+      <div class="input-container">
+        <input name="password" type="password" placeholder="Mật khẩu" id="password" required />
+        <div class="warning">Mật khẩu là bắt buộc</div>
+        <div class="warning" id="passwordLengthWarning">
+          Mật khẩu phải có ít nhất 8 ký tự
+        </div>
+        <div class="warning" id="passwordSpecialCharWarning">
+          Mật khẩu phải có ít nhất một ký tự đặc biệt
+        </div>
+      </div>
+      <div class="input-container">
+        <input name="confirmPassword" type="password" placeholder="Xác nhận mật khẩu của bạn" id="confirmPassword"
+          required />
+        <div class="warning">Xác nhận mật khẩu là bắt buộc</div>
+        <div class="warning" id="passwordMatchWarning">
+          Mật khẩu không khớp
+        </div>
+      </div>
+      <div class="checkbox-container">
+        <input type="checkbox" id="terms" />
+        <label for="terms">Tôi đồng ý
+          <a href="terms.php">Điều khoản dịch vụ của VietTechBlog</a></label>
+      </div>
+      <button type="submit" id="registerBtn" disabled>Đăng ký</button>
+    </form>
+    <div class="social-register">
+      <div class="social-register-text"><span>Đăng ký bằng</span></div>
+      <div class="social-buttons">
+        <button class="social-button">
+          <svg width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#4267B2"
+              d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z" />
+          </svg>
+          Facebook
+        </button>
+        <button class="social-button">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="20px" height="20px">
+            <path fill="#fbc02d"
+              d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12	s5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24s8.955,20,20,20	s20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+            <path fill="#e53935"
+              d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039	l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
+            <path fill="#4caf50"
+              d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36	c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
+            <path fill="#1565c0"
+              d="M43.611,20.083L43.595,20L42,20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571	c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
+          </svg>
+          Google
+        </button>
+        <button class="social-button">
+          <svg width="20" height="20" viewBox="0 0 24 24">
+            <path fill="#333"
+              d="M12 2A10 10 0 0 0 2 12C2 16.42 4.87 20.17 8.84 21.5C9.34 21.58 9.5 21.27 9.5 21C9.5 20.77 9.5 20.14 9.5 19.31C6.73 19.91 6.14 17.97 6.14 17.97C5.68 16.81 5.03 16.5 5.03 16.5C4.12 15.88 5.1 15.9 5.1 15.9C6.1 15.97 6.63 16.93 6.63 16.93C7.5 18.45 8.97 18 9.54 17.76C9.63 17.11 9.89 16.67 10.17 16.42C7.95 16.17 5.62 15.31 5.62 11.5C5.62 10.39 6 9.5 6.65 8.79C6.55 8.54 6.2 7.5 6.75 6.15C6.75 6.15 7.59 5.88 9.5 7.17C10.29 6.95 11.15 6.84 12 6.84C12.85 6.84 13.71 6.95 14.5 7.17C16.41 5.88 17.25 6.15 17.25 6.15C17.8 7.5 17.45 8.54 17.35 8.79C18 9.5 18.38 10.39 18.38 11.5C18.38 15.32 16.04 16.16 13.81 16.41C14.17 16.72 14.5 17.33 14.5 18.26C14.5 19.6 14.5 20.68 14.5 21C14.5 21.27 14.66 21.59 15.17 21.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z" />
+          </svg>
+          Github
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../JS/register.js"></script>
+</body>
+
+</html>

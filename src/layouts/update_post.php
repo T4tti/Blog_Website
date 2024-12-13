@@ -1,0 +1,293 @@
+<?php
+require_once '../PHP/config.php';
+session_start();
+// Kiểm tra nếu chưa đăng nhập
+if (!isset($_SESSION['username'])) {
+    header("Location: ../layouts/login.html?access-error=access_denied");
+    exit();
+}
+
+$post_title = $post_content = "";
+if (isset($_GET['id'])) {
+    $post_id = intval($_GET['id']);
+    // Truy vấn bài viết từ cơ sở dữ liệu
+    $stmt = $conn->prepare("SELECT title, content FROM baiviet WHERE posts_id = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $stmt->bind_result($post_title, $post_content);
+    $stmt->fetch();
+    $stmt->close();
+}
+?>
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../CSS/createarticle.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.6.0/dist/sweetalert2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <title>New Post | VietTechBlog</title>
+  <link rel="icon" type="img/png" href="../Assets/favicon-32x32.png" sizes="favicon-32x32" />
+</head>
+
+<body>
+  <!-- Navbar -->
+  <?php include '../layouts/navbar.php'; ?>
+
+  <div class="editor-container">
+    <form id="frm-post" action="../PHP/upgrade_post.php" method="POST" >
+    <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($post_id); ?>" />
+      <div class="editor-toolbar1">
+        <input type="text" class="editor-input" id="title" name="title" placeholder="Tiêu đề" value="<?php echo nl2br($post_title); ?>" />
+        <button type="submit" class="toolbar-button">
+            <?php echo isset($post_id) ? 'Cập nhật bài viết' : 'Xuất bản bài viết'; ?>
+        </button>
+      </div>
+      <div class="editor-toolbar2">
+        <div class="toolbar-buttons">
+          <button type="button" class="fas fa-bold" onclick="toggleStyle(this, 'bold')"></button>
+          <button type="button" class="fas fa-italic" onclick="toggleStyle(this, 'italic')"></button>
+          <button type="button" class="fas fa-strikethrough" onclick="toggleStyle(this,'strikethrough')"></button>
+          <button type="button" class="fas fa-heading" onclick="toggleStyle(this, 'heading')"></button>
+          <button type="button" class="fas fa-list-ul" onclick="toggleStyle(this, 'insertUnorderedList')"></button>
+          <button type="button" class="fas fa-list-ol" onclick="toggleStyle(this, 'insertOrderedList')"></button>
+          <button type="button" class="fas fa-superscript" onclick="toggleStyle(this, 'superscript')"></button>
+          <button type="button" class="fas fa-align-left" onclick="toggleStyle(this, 'justifyLeft')"></button>
+          <button type="button" class="fas fa-align-center" onclick="toggleStyle(this, 'justifyCenter')"></button>
+          <button type="button" class="fas fa-align-right" onclick="toggleStyle(this, 'justifyRight')"></button>
+          <button type="button" class="fas fa-align-justify" onclick="toggleStyle(this, 'justifyFull')"></button>
+          <button type="button" class="fas fa-eye" onclick="toggleStyle(this, 'preview')"></button>
+          <button type="button" class="fas fa-expand" onclick="toggleStyle(this, 'fullscreen')"></button>
+          <button type="button" class="fas fa-undo" onclick="toggleStyle(this, 'undo')"></button>
+          <button type="button" class="fas fa-redo" onclick="toggleStyle(this, 'redo')"></button>
+          <button type="button" class="fas fa-question-circle" onclick="toggleStyle(this, 'help')"></button>
+          <button type="button" class="fas fa-info-circle" onclick="toggleStyle(this, 'info')"></button>
+          <!-- Add more formatting buttons as needed -->
+        </div>
+      </div>
+      <div contenteditable="true" class="editor-textarea" id="textEditor" placeholder="Nội dung bài viết...">
+            <?php echo nl2br($post_content); ?>
+      </div>
+      <textarea id="hiddenContent" name="content" style="display:none;"></textarea>
+    </form>
+  </div>
+  <script>
+    function toggleStyle(button, command) {
+      const editor = document.getElementById("textEditor");
+      const container = document.querySelector(".editor-container");
+      const toolbar1 = document.querySelector(".editor-toolbar1");
+      const toolbar2 = document.querySelector(".editor-toolbar2");
+      const inputTitle = document.querySelector(".editor-input");
+      const inputDesc = document.querySelector(".editor-input1");
+      editor.focus();
+      if (command === "preview") {
+        // Toggle chế độ xem trước
+        const isReadOnly = editor.getAttribute("contenteditable") === "false";
+        if (isReadOnly) {
+          editor.setAttribute("contenteditable", "true");
+          button.classList.remove("active");
+        } else {
+          editor.setAttribute("contenteditable", "false");
+          button.classList.add("active");
+        }
+        return;
+      }
+
+      if (command === "fullscreen") {
+        // Toggle chế độ toàn màn hình
+        const isFullscreen = container.classList.toggle("fullscreen");
+
+        // Hiển thị/Ẩn các phần tiêu đề và mô tả
+        if (isFullscreen) {
+          toolbar1.style.display = "none";
+          inputTitle.style.display = "none";
+          inputDesc.style.display = "none";
+        } else {
+          toolbar1.style.display = "";
+          inputTitle.style.display = "";
+          inputDesc.style.display = "";
+        }
+
+        button.classList.toggle("active");
+        return;
+      }
+
+      if (command === "undo") {
+        // Hoàn tác
+        document.execCommand("undo", false, null);
+        return;
+      }
+
+      if (command === "redo") {
+        // Làm lại
+        document.execCommand("redo", false, null);
+        return;
+      }
+
+      if (command === "help") {
+        // Hiển thị hộp thoại trợ giúp
+        alert("Hướng dẫn sử dụng trình soạn thảo:\n- Sử dụng các nút để áp dụng định dạng.\n- Nhấn nút Preview để xem trước nội dung.\n- Nhấn nút Fullscreen để chuyển đổi chế độ toàn màn hình.");
+        return;
+      }
+
+      if (command === "info") {
+        // Hiển thị thông tin về trình soạn thảo
+        alert("Trình soạn thảo văn bản phiên bản 1.0\nHỗ trợ các tính năng định dạng, danh sách, căn chỉnh, và xem trước.");
+        return;
+      }
+
+      if (["justifyLeft", "justifyCenter", "justifyRight", "justifyFull"].includes(command)) {
+        // Loại bỏ trạng thái active từ tất cả các nút căn chỉnh
+        const alignmentButtons = document.querySelectorAll(".fa-align-left, .fa-align-center, .fa-align-right, .fa-align-justify");
+        alignmentButtons.forEach(btn => btn.classList.remove("active"));
+
+        // Áp dụng căn chỉnh và kích hoạt trạng thái active cho nút được nhấn
+        document.execCommand(command, false, null);
+        button.classList.add("active");
+        return;
+      }
+
+      button.classList.toggle("active");
+
+      const selectedText = window.getSelection();
+      const parentNode = selectedText.anchorNode.parentNode;
+
+      if (command === "superscript" || command === "bold" || command === "italic" || command === "strikethrough") {
+        document.execCommand(command, false, null);
+      } else if (command === "heading") {
+        const selectedText = window.getSelection();
+        const parentNode = selectedText.anchorNode.parentNode;
+
+        // Toggle heading
+        if (parentNode && parentNode.tagName === 'H1') {
+          document.execCommand('formatBlock', false, 'P'); // Remove heading
+        } else {
+          document.execCommand('formatBlock', false, 'H1'); // Apply heading
+        }
+      } else if (command === "insertUnorderedList" || command === "insertOrderedList") {
+        const isUnorderedList = command === "insertUnorderedList";
+        const otherButton = document.querySelector(isUnorderedList ? ".fa-list-ol" : ".fa-list-ul");
+
+        if (otherButton && otherButton.classList.contains("active")) {
+          otherButton.classList.remove("active");
+          document.execCommand(isUnorderedList ? "insertOrderedList" : "insertUnorderedList", false, null);
+        }
+
+        document.execCommand(command, false, null);
+      }
+
+      // Adjust for heading inside a list
+      if (command === "heading" && parentNode.tagName === "LI") {
+        document.execCommand("outdent", false, null); // Remove list formatting
+        document.execCommand('formatBlock', false, 'H1'); // Apply heading0+- fz21`
+      } else if (parentNode.tagName === "H1" && (command === "insertUnorderedList" || command === "insertOrderedList")) {
+        document.execCommand("formatBlock", false, "P"); // Convert back to paragraph if a list is applied
+      }
+
+      // Ensure list removal resets to paragraph
+      if ((command === "insertUnorderedList" || command === "insertOrderedList") && parentNode.tagName === "H1") {
+        document.execCommand("formatBlock", false, "P");
+      }
+      editor.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          const selection = window.getSelection();
+          const parentNode = selection.anchorNode.parentNode;
+
+          // Kiểm tra nếu dòng hiện tại là H1
+          if (parentNode && parentNode.tagName === "H1") {
+            // Tìm nút H1 trong thanh công cụ và tắt trạng thái active
+            const h1Button = document.querySelector(".editor-toolbar button[data-command='heading']");
+            if (h1Button) {
+              h1Button.classList.remove("active");
+            }
+
+            // Đặt dòng mới về định dạng đoạn văn (<p>)
+            setTimeout(() => {
+              document.execCommand("formatBlock", false, "P");
+            }, 0); // Sử dụng setTimeout để xử lý sau khi Enter
+          }
+        }
+      });
+    }
+    function toggleAlignment(button, command) {
+      const editor = document.getElementById("contentEditor");
+      editor.focus();
+
+      // Remove active state from all alignment buttons
+      const alignmentButtons = document.querySelectorAll(
+        ".fa-align-left, .fa-align-center, .fa-align-right, .fa-align-justify"
+      );
+      alignmentButtons.forEach((btn) => btn.classList.remove("active"));
+
+      // Apply the alignment and set active state for the clicked button
+      document.execCommand(command, false, null);
+      button.classList.add("active");
+    }
+  </script>
+  <script>
+    const frm = document.getElementById("frm-post");
+    function showErrorMessage(message, inputElement) {
+      Swal.fire({
+          icon: "error",
+          title: "Lỗi",
+          text: message,
+      });
+      inputElement.focus();
+    }
+
+    frm.addEventListener("submit", (event) => {
+      const title = document.getElementById("title").value.trim();
+      const content = document.getElementById("textEditor").innerHTML.trim();
+
+      if (!title) {
+          showErrorMessage("Vui lòng nhập tiêu đề cho bài viết!", document.getElementById("title"));
+          event.preventDefault();
+          return;
+      }
+
+      if (!content) {
+          showErrorMessage("Vui lòng nhập nội dung bài viết!", document.getElementById("textEditor"));
+          event.preventDefault();
+          return;
+      }else{
+        document.getElementById("hiddenContent").value = content;
+      }
+    });
+  </script>
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const postSuccess = urlParams.get('post-success');
+    const postFail = urlParams.get('post-fail');
+
+    if (postSuccess === 'success') {
+      Swal.fire({
+        icon: 'success',
+        title: 'Thành công',
+        text: 'Bài viết đã được đăng thành công!',
+        timer: 3000,
+        showConfirmButton: false
+      });
+      urlParams.delete('post-success');
+    }
+
+    if (postFail === 'fail') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Lỗi',
+        text: 'Đã xảy ra lỗi khi đăng bài viết!',
+        timer: 3000,
+        showConfirmButton: false
+      });
+      urlParams.delete('post-fail');
+    }
+    window.history.replaceState({}, document.title, window.location.pathname);
+  </script>
+
+</body>
+
+</html>

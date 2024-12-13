@@ -1,0 +1,41 @@
+:root {
+  --primary-color: #337ab7;
+  --secondary-color: #2c3e50;
+  --text-color: #333;
+  --light-bg: #f8f9fa;
+  --nav-color: #706e6e;
+  --footer-bg: #0b1a33;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--light-bg);
+  margin: 0;
+  padding: 0;
+}
+
+/* Bố cục nội dung bài viết */
+.post {
+  max-width: 800px;
+  margin: 2rem auto; /* Canh giữa */
+  padding: 1.5rem;
+  background-color: #ffffff; /* Màu nền trắng */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+  border-radius: 8px; /* Bo góc mềm mại */
+}
+
+.post h1 {
+  color: var(--primary-color); /* Tiêu đề bài viết */
+  margin-bottom: 1rem;
+}
+
+.post .meta {
+  font-size: 0.9rem;
+  color: var(--nav-color); /* Màu chữ mô tả bài viết */
+  margin-bottom: 1.5rem;
+}
+
+.post div {
+  line-height: 1.8; /* Tăng khoảng cách giữa các dòng */
+  color: var(--text-color);
+}

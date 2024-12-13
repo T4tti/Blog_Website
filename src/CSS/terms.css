@@ -1,0 +1,37 @@
+:root {
+  --primary-color: #337ab7;
+  --secondary-color: #2c3e50;
+  --text-color: #333;
+  --light-bg: #f8f9fa;
+  --nav-color: #706e6e;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.section-title {
+  font-weight: bolder;
+  margin-top: 20px;
+  font-size: 1.5rem;
+}
+.sub-section-title {
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 1.25rem;
+}
+.content-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+.content-list ul li {
+  margin-bottom: 10px;
+}
+.sidebar {
+  max-width: 300px;
+}
+.content {
+  padding: 20px;
+}

@@ -1,0 +1,71 @@
+/* Căn chỉnh toàn trang */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f5f5f5;
+}
+
+/* Container chính */
+.code-container {
+    text-align: center;
+    background: white;
+    padding: 20px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề */
+.code-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* Các ô nhập mã */
+.code-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.code-input {
+    width: 200px;
+    text-align: center;
+    font-size: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.code-input:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(72, 239, 123, 0.5);
+}
+
+/* Nút gửi */
+.submit-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+    transform: scale(1.1);
+}
+
+#error-message {
+    margin-top: 10px;
+    color: red;
+    font-size: 14px;
+}
