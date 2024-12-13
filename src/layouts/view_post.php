@@ -2,7 +2,9 @@
 require_once '../PHP/config.php';
 session_start();
 
-$id_login = $_SESSION['user_id'];
+if(!isset($_SESSION['user_id'])) {
+    $id_login = 0;
+}
 // Kiểm tra nếu có tham số id được gửi qua URL
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
