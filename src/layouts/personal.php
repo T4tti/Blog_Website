@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Kiểm tra tuổi >= 16
             $birthYear = (int) date('Y', strtotime($birth));
             $currentYear = (int) date('Y');
-            if ($currentYear - $birthYear < 16) {
-                throw new Exception("Bạn phải từ 16 tuổi trở lên.");
+            if ($currentYear - $birthYear < 13) {
+                throw new Exception("Bạn phải từ 13 tuổi trở lên.");
             }
 
             // Cập nhật thông tin cá nhân
