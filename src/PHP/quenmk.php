@@ -51,7 +51,7 @@
     
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $email = isset($_POST['email']) ? trim($_POST['email']) : '';
-        
+        $_SESSION['email'] = $email;
         // Kiểm tra email có tồn tại
         $stmt = $conn->prepare("SELECT * FROM taikhoan WHERE email = ?");
         $stmt->bind_param("s", $email);

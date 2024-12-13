@@ -6,7 +6,7 @@
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : null;
         $title = $_POST['title'];
-        $content = $_POST['content'];
+        $content = preg_replace('/\s+/', ' ', $_POST['content']);
         $user_id = $_SESSION['user_id'];
 
         if ($post_id) {

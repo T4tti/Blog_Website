@@ -61,6 +61,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (empty($new_password) || empty($confirm_password)) {
                     throw new Exception("Vui lòng nhập mật khẩu mới và xác nhận mật khẩu.");
                 }
+                $stmt = $conn->prepare("SELECT username FROM taikhoan WHERE email = ?");
+                $stmt->bind_param("s", $_SESSION['email']);
+                $stmt->execute();
+                $stmt->bind_result($username);
+                $stmt->fetch();
+                $stmt->close();
+                $_SESSION['email'] = '';    // Xóa email khỏi session
             }
 
             // Kiểm tra mật khẩu xác nhận
@@ -94,12 +101,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->close();
 
             $_SESSION['flash_success'] = "Đổi mật khẩu thành công!";
+            header("Location: ../layouts/login.html");
         }
     } catch (Exception $e) {
         $_SESSION['flash_error'] = $e->getMessage();
     }
 
     header("Location: " . $_SERVER['PHP_SELF']);
+
     exit();
 }
 
@@ -226,14 +235,7 @@ $conn->close();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../JS/personal.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('forget')) {
-            urlParams.delete('forget');
-        }
-        window.history.replaceState({}, document.title, window.location.pathname);
-    </script>                    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>                   
 </body>
 
 </html>
