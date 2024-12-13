@@ -43,7 +43,9 @@
                 timer: 3000,
                 showConfirmButton: false
             }).then(() => {
-                window.location.href = "<?php echo $redirect_url; ?>";
+                <?php 
+                    header("location: $redirect_url");
+                ?>
             });
         <?php elseif ($status === 'error'): ?>
             Swal.fire({

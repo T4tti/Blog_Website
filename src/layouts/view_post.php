@@ -4,6 +4,8 @@ session_start();
 
 if(!isset($_SESSION['user_id'])) {
     $id_login = 0;
+}else{
+    $id_login = $_SESSION['user_id'];
 }
 // Kiểm tra nếu có tham số id được gửi qua URL
 if (isset($_GET['id'])) {
