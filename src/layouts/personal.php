@@ -226,7 +226,14 @@ $conn->close();
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../JS/personal.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('forget')) {
+            urlParams.delete('forget');
+        }
+        window.history.replaceState({}, document.title, window.location.pathname);
+    </script>                    
 </body>
 
 </html>
