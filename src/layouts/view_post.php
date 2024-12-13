@@ -1,19 +1,21 @@
 <?php
 require_once '../PHP/config.php';
+session_start();
 
+$id_login = $_SESSION['user_id'];
 // Kiểm tra nếu có tham số id được gửi qua URL
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);
-
     // Truy vấn bài viết theo id
-    $stmt = $conn->prepare("SELECT p.title, p.content, p.created_at, a.fullname 
+    $stmt = $conn->prepare("SELECT p.title, p.content, p.created_at, p.user_id, a.fullname 
                             FROM baiviet p
                             JOIN taikhoan a ON p.user_id = a.id
                             WHERE p.posts_id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
-    $stmt->bind_result($title, $content, $created_at, $fullname);
+    $stmt->bind_result($title, $content, $created_at, $id_post, $fullname);
 
+    
     if ($stmt->fetch()) {
         // Dữ liệu bài viết đã được lấy thành công
     } else {
@@ -58,9 +60,15 @@ $conn->close();
                 <em>Ngày đăng:</em>
                 <?php echo date("h:i A, d/m/Y", strtotime($created_at)); ?>
             </p>
+            <?php if ($id_post === $id_login): ?>
+                <div class="mt-4">
+                    <a href="../layouts/update_post.php?id=<?php echo $id; ?>" class="btn btn-primary">Chỉnh sửa bài viết</a>
+                </div>
+            <?php endif; ?>
             <div>
                 <?php echo nl2br($content); ?>
             </div>
+
         </div>
     </div>
 

@@ -110,10 +110,14 @@ $stmt->close();
 
             <!-- Nút xóa bên phải -->
             <div>
-              <a href="../PHP/delete_post.php?id=<?php echo $post['posts_id']; ?>" class="btn btn-sm btn-danger"
-                onclick="return confirm('Bạn có chắc chắn muốn xóa bài viết này?');">
+              <a href="#" class="btn btn-sm btn-danger"
+                  onclick="confirmDeletePost(<?php echo $post['posts_id']; ?>)">
                 <img src="../Assets/icons8-delete-20.png" alt="Delete" />
               </a>
+              <form id="delete-post-<?php echo $post['posts_id']; ?>" action="../PHP/delete_post.php" method="POST" style="display: none;">
+                <input type="hidden" name="post_id" value="<?php echo $post['posts_id']; ?>">
+                <input type="hidden" name="delete_post" value="1">
+              </form>
             </div>
           </div>
         </div>
@@ -190,6 +194,25 @@ $stmt->close();
   </script>
   <!-- Thông báo xóa thành công -->
   <script>
+
+    function confirmDeletePost(postId) {
+      Swal.fire({
+        title: 'Bạn có chắc chắn?',
+        text: "Hành động này không thể hoàn tác!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Xóa',
+        cancelButtonText: 'Hủy'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          document.getElementById(`delete-post-${postId}`).submit();
+        }
+      });
+    }
+
+
     const urlParams = new URLSearchParams(window.location.search);
     const message = urlParams.get('message');
 

@@ -7,11 +7,16 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-if (isset($_GET['id'])) {
-    $post_id = (int)$_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['post_id'])) {
+    $post_id = (int)$_POST['post_id'];
 
-    // Kiểm tra xem bài viết có thuộc về người dùng hay không
-    $stmt = $conn->prepare("SELECT * FROM baiviet WHERE posts_id = ? AND user_id = (SELECT id FROM taikhoan WHERE username = ?)");
+    // Kiểm tra xem bài viết có thuộc về người dùng không
+    $stmt = $conn->prepare("
+        SELECT posts_id 
+        FROM baiviet 
+        WHERE posts_id = ? 
+        AND user_id = (SELECT id FROM taikhoan WHERE username = ?)
+    ");
     $stmt->bind_param("is", $post_id, $_SESSION['username']);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -21,17 +26,21 @@ if (isset($_GET['id'])) {
         $delete_stmt = $conn->prepare("DELETE FROM baiviet WHERE posts_id = ?");
         $delete_stmt->bind_param("i", $post_id);
         if ($delete_stmt->execute()) {
+            $delete_stmt->close();
             header("Location: ../layouts/profile.php?message=deleted");
             exit();
         } else {
-            echo "Xóa bài viết thất bại.";
+            $delete_stmt->close();
+            header("Location: ../layouts/profile.php?message=delete_failed");
+            exit();
         }
-        $delete_stmt->close();
     } else {
-        echo "Bạn không có quyền xóa bài viết này.";
+        $stmt->close();
+        header("Location: ../layouts/profile.php?message=not_authorized");
+        exit();
     }
-    $stmt->close();
 } else {
-    echo "ID bài viết không hợp lệ.";
+    header("Location: ../layouts/profile.php?message=invalid_request");
+    exit();
 }
 ?>
